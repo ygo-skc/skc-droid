@@ -1,1 +1,1 @@
-# SKCDroid
+# skc-droid
