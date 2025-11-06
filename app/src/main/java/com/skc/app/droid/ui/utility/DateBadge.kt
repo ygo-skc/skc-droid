@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.skc.app.droid.ui.theme.DateGray
 import com.skc.app.droid.ui.theme.DateRed
 import com.skc.app.droid.ui.theme.SKCTheme
@@ -38,7 +39,10 @@ fun DateBadge(date: String, modifier: Modifier = Modifier) {
         .width(width)
         .background(color = DateGray)
 
-    Column(modifier = parentModifier, horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        modifier = parentModifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
         Text(
             text = d.month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH),
             modifier = Modifier
@@ -50,16 +54,16 @@ fun DateBadge(date: String, modifier: Modifier = Modifier) {
         )
         Text(
             text = d.dayOfMonth.toString(),
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
         )
         Text(
             text = d.year.toString(),
-            fontWeight = FontWeight.Light
+            fontWeight = FontWeight.Light,
         )
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = false)
 @Composable
 fun DateBadgePreview() {
     SKCTheme {
