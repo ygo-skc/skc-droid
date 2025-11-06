@@ -22,9 +22,9 @@ import java.time.format.TextStyle
 import java.util.Locale
 
 @Composable
-fun InlineDate(date: String, modifier: Modifier = Modifier) {
+fun InlineDate(date: String) {
     val d = LocalDate.parse(date, DatesUtil.SKC_DATE_FORMAT)
-    val parentModifier = modifier
+    val parentModifier = Modifier
         .clip(
             RoundedCornerShape(corner = CornerSize(5.dp))
         )
