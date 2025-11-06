@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import com.skc.app.droid.ui.home.DBStats
 import com.skc.app.droid.ui.theme.SKCTheme
-import com.skc.app.droid.ui.utility.DateBadge
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             SKCTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    DateBadge("2025-10-27", modifier = Modifier.padding(innerPadding))
+                    DBStats(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
