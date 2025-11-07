@@ -14,9 +14,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.skc.app.droid.ui.theme.DateGray
-import com.skc.app.droid.ui.theme.DateRed
 import com.skc.app.droid.ui.theme.SKCTheme
+import com.skc.app.droid.ui.theme.dateGray
+import com.skc.app.droid.ui.theme.dateRed
 import com.skc.app.droid.util.DatesUtil
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -29,12 +29,12 @@ fun InlineDate(date: String) {
     Row(
         modifier = Modifier
             .clip(RoundedCornerShape(corner = CornerSize(5.dp)))
-            .background(color = DateGray),
+            .background(color = dateGray()),
     ) {
         Text(
             text = d.month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH),
             modifier = Modifier
-                .background(color = DateRed)
+                .background(color = dateRed())
                 .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
             color = Color.White,
             style = MaterialTheme.typography.labelMedium
@@ -43,11 +43,13 @@ fun InlineDate(date: String) {
             Text(
                 text = "${d.dayOfMonth}, ",
                 fontWeight = FontWeight.Black,
-                style = MaterialTheme.typography.labelMedium
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onBackground
             )
             Text(
                 text = d.year.toString(),
-                style = MaterialTheme.typography.labelMedium
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
     }

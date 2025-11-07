@@ -11,4 +11,12 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 val DateRed = Color(0xFFE42263)
-val DateGray = Color(0xFFF5F5F5)
+val DateGray = Color(0xFFF5F5F5)@Composable
+fun dateGray(): Color {
+    return if (isSystemInDarkTheme()) Color(0xFF5C5C5C) else Color(0xFFF5F5F5)
+}
+
+@Composable
+fun dateRed(): Color {
+    return if (isSystemInDarkTheme()) Color(0xFFB22A53) else Color(0xFFE42263)
+}

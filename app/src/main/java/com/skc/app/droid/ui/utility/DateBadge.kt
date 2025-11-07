@@ -18,9 +18,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.skc.app.droid.ui.theme.DateGray
-import com.skc.app.droid.ui.theme.DateRed
 import com.skc.app.droid.ui.theme.SKCTheme
+import com.skc.app.droid.ui.theme.dateGray
+import com.skc.app.droid.ui.theme.dateRed
 import com.skc.app.droid.util.DatesUtil
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -36,7 +36,7 @@ fun DateBadge(date: String) {
             RoundedCornerShape(corner = CornerSize(10.dp))
         )
         .width(width)
-        .background(color = DateGray)
+        .background(color = dateGray())
 
     Column(
         modifier = parentModifier,
@@ -46,7 +46,7 @@ fun DateBadge(date: String) {
             text = d.month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH),
             modifier = Modifier
                 .fillMaxWidth()
-                .background(color = DateRed),
+                .background(color = dateRed()),
             textAlign = TextAlign.Center,
             color = Color.White,
             style = MaterialTheme.typography.labelLarge
