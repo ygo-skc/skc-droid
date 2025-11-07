@@ -17,11 +17,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.skc.app.droid.model.DBStats
 import com.skc.app.droid.ui.theme.SKCTheme
 import com.skc.app.droid.ui.utility.Section
 
 @Composable
-fun DBStats() {
+fun DBStats(stats: DBStats) {
     Section(header = "Content") {
         Column(
             modifier = Modifier.padding(all = 12.dp),
@@ -40,9 +41,9 @@ fun DBStats() {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    DBMetric(total = "13012", metric = "Cards")
-                    DBMetric(total = "85", metric = "Ban Lists")
-                    DBMetric(total = "365", metric = "Products")
+                    DBMetric(total = stats.cardTotal.toString(), metric = "Cards")
+                    DBMetric(total = stats.banListTotal.toString(), metric = "Ban Lists")
+                    DBMetric(total = stats.productTotal.toString(), metric = "Products")
                 }
                 Spacer(modifier = Modifier.weight(1f))
             }
@@ -91,6 +92,6 @@ private fun DBMetric(total: String, metric: String) {
 @Composable
 fun DBStatsPreview() {
     SKCTheme {
-        DBStats()
+        DBStats(DBStats(productTotal = 365, cardTotal = 13017, banListTotal = 85, 10))
     }
 }
