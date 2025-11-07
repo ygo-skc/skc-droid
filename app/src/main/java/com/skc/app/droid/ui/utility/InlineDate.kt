@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,28 +25,29 @@ import java.util.Locale
 @Composable
 fun InlineDate(date: String) {
     val d = LocalDate.parse(date, DatesUtil.SKC_DATE_FORMAT)
-    val parentModifier = Modifier
-        .clip(
-            RoundedCornerShape(corner = CornerSize(5.dp))
-        )
-        .background(color = DateGray)
 
-    Row(modifier = parentModifier) {
+    Row(
+        modifier = Modifier
+            .clip(RoundedCornerShape(corner = CornerSize(5.dp)))
+            .background(color = DateGray),
+    ) {
         Text(
             text = d.month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH),
             modifier = Modifier
                 .background(color = DateRed)
-                .padding(horizontal = 4.dp),
+                .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
             color = Color.White,
+            style = MaterialTheme.typography.labelMedium
         )
-        Row(modifier = Modifier.padding(horizontal = 4.dp)) {
+        Row(modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)) {
             Text(
                 text = "${d.dayOfMonth}, ",
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Black,
+                style = MaterialTheme.typography.labelMedium
             )
             Text(
                 text = d.year.toString(),
-                fontWeight = FontWeight.Light
+                style = MaterialTheme.typography.labelMedium
             )
         }
     }
