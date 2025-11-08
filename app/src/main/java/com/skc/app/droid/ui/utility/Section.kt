@@ -27,9 +27,6 @@ fun Section(
         ElevatedCard(
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            ),
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = 8.dp
             ), modifier = Modifier.fillMaxWidth()
         ) {
             content()
