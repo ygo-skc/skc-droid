@@ -4,22 +4,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.skc.app.droid.model.CardOfTheDay
 import com.skc.app.droid.model.YGOCard
 import com.skc.app.droid.ui.theme.SKCTheme
 import com.skc.app.droid.ui.utility.InlineDate
 import com.skc.app.droid.ui.utility.Section
+import com.skc.app.droid.ui.utility.YGOCardImage
 
 @Composable
 fun CardOfTheDay(cotd: CardOfTheDay) {
@@ -28,15 +24,7 @@ fun CardOfTheDay(cotd: CardOfTheDay) {
             modifier = Modifier.padding(15.dp),
             horizontalArrangement = Arrangement.spacedBy(18.dp)
         ) {
-            AsyncImage(
-                model = "https://images.thesupremekingscastle.com/cards/md/${cotd.card.cardID}.jpg",
-                contentDescription = "Card Image",
-                modifier = Modifier
-                    .width(85.dp)
-                    .clip(
-                        RoundedCornerShape(corner = CornerSize(45.dp))
-                    )
-            )
+            YGOCardImage(length = 85.dp, cardID = cotd.card.cardID)
             Column(
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
