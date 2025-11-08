@@ -15,19 +15,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.skc.app.droid.model.CardOfTheDay
+import com.skc.app.droid.model.YGOCard
 import com.skc.app.droid.ui.theme.SKCTheme
 import com.skc.app.droid.ui.utility.InlineDate
 import com.skc.app.droid.ui.utility.Section
 
 @Composable
-fun CardOfTheDay() {
+fun CardOfTheDay(cotd: CardOfTheDay) {
     Section(header = "Card of the day") {
         Row(
             modifier = Modifier.padding(15.dp),
             horizontalArrangement = Arrangement.spacedBy(18.dp)
         ) {
             AsyncImage(
-                model = "https://images.thesupremekingscastle.com/cards/md/89943723.jpg",
+                model = "https://images.thesupremekingscastle.com/cards/md/${cotd.card.cardID}.jpg",
                 contentDescription = "Card Image",
                 modifier = Modifier
                     .width(85.dp)
@@ -38,13 +40,13 @@ fun CardOfTheDay() {
             Column(
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
-                InlineDate("2025-10-27")
+                InlineDate(if (cotd.date == "") "1991-07-27" else cotd.date)
                 Text(
-                    text = "Elemental HERO Neos",
+                    text = cotd.card.cardName,
                     fontWeight = FontWeight.Medium
                 )
                 Text(
-                    text = "Warrior/Normal",
+                    text = cotd.card.monsterType ?: cotd.card.cardAttribute,
                     fontWeight = FontWeight.Light,
                 )
             }
@@ -56,6 +58,21 @@ fun CardOfTheDay() {
 @Composable
 fun CardOfTheDayPreview() {
     SKCTheme {
-        CardOfTheDay()
+        CardOfTheDay(
+            CardOfTheDay(
+                date = "2025-10-27",
+                version = 1,
+                card = YGOCard(
+                    cardID = "89943723",
+                    cardColor = "Normal",
+                    cardName = "Elemental HERO Neos",
+                    cardAttribute = "Light",
+                    cardEffect = "None",
+                    monsterType = "Warrior/Normal",
+                    monsterAttack = 2500,
+                    monsterDefense = 2000
+                )
+            )
+        )
     }
 }

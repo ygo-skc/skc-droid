@@ -10,7 +10,7 @@ data class YGOCard(
     val cardName: String,
     val cardAttribute: String,
     val cardEffect: String,
-    val monsterType: String?,
-    val monsterAttack: Int?,
-    val monsterDefense: Int?,
+    val monsterType: String? = null,
+    val monsterAttack: Int? = null,
+    val monsterDefense: Int? = null,
 ) : Parcelable

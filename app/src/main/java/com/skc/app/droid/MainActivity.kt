@@ -42,8 +42,10 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.spacedBy(40.dp)
                     ) {
                         val stats by homeViewModel.dbStats.collectAsState()
+                        val cardOfTheDay by homeViewModel.cotd.collectAsState()
+
                         DBStats(stats)
-                        CardOfTheDay()
+                        CardOfTheDay(cotd = cardOfTheDay)
                     }
                 }
             }
