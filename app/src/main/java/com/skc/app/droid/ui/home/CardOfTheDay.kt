@@ -24,7 +24,7 @@ fun CardOfTheDay(cotd: CardOfTheDay) {
             modifier = Modifier.padding(15.dp),
             horizontalArrangement = Arrangement.spacedBy(18.dp)
         ) {
-            YGOCardImage(length = 85.dp, cardID = cotd.card.cardID)
+            YGOCardImage(length = 85.dp, cardID = cotd.card.cardID, cardColor = cotd.card.cardColor)
             Column(
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
