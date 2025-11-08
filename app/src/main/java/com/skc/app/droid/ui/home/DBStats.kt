@@ -10,8 +10,10 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -20,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.skc.app.droid.model.DBStats
 import com.skc.app.droid.ui.theme.SKCTheme
 import com.skc.app.droid.ui.utility.Section
+import com.skc.app.droid.x.getAppVersion
 
 @Composable
 fun DBStats(stats: DBStats) {
@@ -56,6 +59,8 @@ fun DBStats(stats: DBStats) {
 
 @Composable
 private fun DataDisclaimer() {
+    val context = LocalContext.current
+    val versionInfo = remember { context.getAppVersion() }
     Text(
         "Konami owns all rights to Yu-Gi-Oh! and all card images used in this app.",
         fontWeight = FontWeight.Normal,
@@ -67,7 +72,7 @@ private fun DataDisclaimer() {
         style = MaterialTheme.typography.labelMedium
     )
     Text(
-        "App Version v1.0.0",
+        "App Version ${versionInfo}",
         fontWeight = FontWeight.Normal,
         style = MaterialTheme.typography.labelMedium,
         fontStyle = FontStyle.Italic
