@@ -34,11 +34,11 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(horizontal = 5.dp),
                 ) { innerPadding ->
                     Column(
                         modifier = Modifier
-                            .padding(innerPadding),
+                            .padding(innerPadding)
+                            .padding(horizontal = 10.dp),
                         verticalArrangement = Arrangement.spacedBy(40.dp)
                     ) {
                         val stats by homeViewModel.dbStats.collectAsState()
