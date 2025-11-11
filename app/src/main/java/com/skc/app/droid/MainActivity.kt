@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier
                             .padding(innerPadding)
-                            .padding(horizontal = 10.dp),
+                            .padding(horizontal = 15.dp),
                         verticalArrangement = Arrangement.spacedBy(40.dp)
                     ) {
                         val stats by homeViewModel.dbStats.collectAsState()
