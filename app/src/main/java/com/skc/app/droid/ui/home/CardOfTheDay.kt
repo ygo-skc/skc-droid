@@ -21,7 +21,7 @@ import com.skc.app.droid.ui.utility.YGOCardImage
 fun CardOfTheDay(cotd: CardOfTheDay) {
     Section(header = "Card of the day") {
         Row(
-            modifier = Modifier.padding(15.dp),
+            modifier = Modifier.padding(10.dp),
             horizontalArrangement = Arrangement.spacedBy(18.dp)
         ) {
             YGOCardImage(length = 85.dp, cardID = cotd.card.cardID, cardColor = cotd.card.cardColor)
@@ -29,14 +29,18 @@ fun CardOfTheDay(cotd: CardOfTheDay) {
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 InlineDate(if (cotd.date == "") "1991-07-27" else cotd.date)
-                Text(
-                    text = cotd.card.cardName,
-                    fontWeight = FontWeight.Medium
-                )
-                Text(
-                    text = cotd.card.monsterType ?: cotd.card.cardAttribute,
-                    fontWeight = FontWeight.Light,
-                )
+                Column(
+                    verticalArrangement = Arrangement.spacedBy((-2).dp)
+                ) {
+                    Text(
+                        text = cotd.card.cardName,
+                        fontWeight = FontWeight.Medium
+                    )
+                    Text(
+                        text = cotd.card.monsterType ?: cotd.card.cardAttribute,
+                        fontWeight = FontWeight.Light,
+                    )
+                }
             }
         }
     }
