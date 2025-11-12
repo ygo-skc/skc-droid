@@ -27,18 +27,28 @@ private val httpClient = OkHttpClient.Builder().addInterceptor { chain ->
     )
 
 
-fun getSKCAPIClient(): SKCService {
-    return Retrofit.Builder().baseUrl("https://skc-ygo-api.com")
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(httpClient.build())
-        .build()
-        .create(SKCService::class.java)
+fun getSKCAPIClient(): SKCAPIService {
+    return Retrofit.Builder()
+        .commonConfigs("https://skc-ygo-api.com")
+        .create(SKCAPIService::class.java)
 }
 
 fun getSuggestionEngineClient(): SuggestionEngineService {
-    return Retrofit.Builder().baseUrl("https://suggestions.skc-ygo-api.com")
+    return Retrofit.Builder()
+        .commonConfigs("https://suggestions.skc-ygo-api.com")
+        .create(SuggestionEngineService::class.java)
+}
+
+fun getHeartAPIClient(): HeartAPIService {
+    return Retrofit.Builder()
+        .commonConfigs("https://heart-api.com")
+        .create(HeartAPIService::class.java)
+}
+
+private fun Retrofit.Builder.commonConfigs(baseURL: String): Retrofit {
+    return this
+        .baseUrl(baseURL)
         .addConverterFactory(GsonConverterFactory.create())
         .client(httpClient.build())
         .build()
-        .create(SuggestionEngineService::class.java)
 }

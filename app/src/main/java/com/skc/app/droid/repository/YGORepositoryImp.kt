@@ -2,7 +2,7 @@ package com.skc.app.droid.repository
 
 import com.skc.app.droid.model.CardOfTheDay
 import com.skc.app.droid.model.DBStats
-import com.skc.app.droid.service.SKCService
+import com.skc.app.droid.service.SKCAPIService
 import com.skc.app.droid.service.SuggestionEngineService
 import com.skc.app.droid.service.getSKCAPIClient
 import com.skc.app.droid.service.getSuggestionEngineClient
@@ -19,7 +19,7 @@ interface SuggestionEngineRepository {
 interface YGORepository : SKCRepository, SuggestionEngineRepository
 
 class YGORepositoryImp(
-    private val skcAPIClient: SKCService = getSKCAPIClient(),
+    private val skcAPIClient: SKCAPIService = getSKCAPIClient(),
     private val suggestionEngineClient: SuggestionEngineService = getSuggestionEngineClient(),
 ) : YGORepository {
     override suspend fun getDBStats(): Response<DBStats> {
