@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-val httpClient = OkHttpClient.Builder().addInterceptor { chain ->
+private val httpClient = OkHttpClient.Builder().addInterceptor { chain ->
     val original = chain.request()
 
     val requestBuilder = original.newBuilder()

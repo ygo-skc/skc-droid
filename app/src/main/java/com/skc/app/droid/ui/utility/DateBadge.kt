@@ -26,20 +26,20 @@ import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.Locale
 
+private val parentModifier = Modifier
+    .clip(
+        RoundedCornerShape(corner = CornerSize(10.dp))
+    )
+    .width(70.dp)
+
 @Composable
 fun DateBadge(date: String) {
     val d = LocalDate.parse(date, DatesUtil.SKC_DATE_FORMAT)
 
-    val width = 70.dp
-    val parentModifier = Modifier
-        .clip(
-            RoundedCornerShape(corner = CornerSize(10.dp))
-        )
-        .width(width)
-        .background(color = dateGray())
 
     Column(
-        modifier = parentModifier,
+        modifier = parentModifier
+            .background(color = dateGray()),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(

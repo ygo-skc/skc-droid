@@ -1,6 +1,7 @@
 package com.skc.app.droid.ui.utility
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CornerSize
@@ -22,24 +23,26 @@ import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.Locale
 
+private val padding = PaddingValues(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
+
 @Composable
 fun InlineDate(date: String) {
     val d = LocalDate.parse(date, DatesUtil.SKC_DATE_FORMAT)
 
     Row(
         modifier = Modifier
-            .clip(RoundedCornerShape(corner = CornerSize(5.dp)))
+            .clip(RoundedCornerShape(corner = CornerSize(10.dp)))
             .background(color = dateGray()),
     ) {
         Text(
             text = d.month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH),
             modifier = Modifier
                 .background(color = dateRed())
-                .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
+                .padding(paddingValues = padding),
             color = Color.White,
             style = MaterialTheme.typography.labelMedium
         )
-        Row(modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)) {
+        Row(modifier = Modifier.padding(paddingValues = padding)) {
             Text(
                 text = "${d.dayOfMonth}, ",
                 fontWeight = FontWeight.Black,
