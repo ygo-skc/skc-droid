@@ -13,7 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.skc.app.droid.ui.home.Home
 import com.skc.app.droid.ui.theme.SKCTheme
-import com.skc.app.droid.util.BottomNavBar
+import com.skc.app.droid.ui.utility.BottomNavBar
 import com.skc.app.droid.viewmodel.HomeViewModel
 
 class MainActivity : ComponentActivity() {

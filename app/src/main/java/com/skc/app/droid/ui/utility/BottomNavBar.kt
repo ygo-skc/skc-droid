@@ -1,4 +1,4 @@
-package com.skc.app.droid.util
+package com.skc.app.droid.ui.utility
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
