@@ -10,10 +10,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -23,16 +20,14 @@ private val tabs = listOf(
 )
 
 @Composable
-fun BottomNavBar() {
-    var selectedIndex by remember { mutableIntStateOf(0) }
-
+fun BottomNavBar(selectedIndex: MutableState<Int>) {
     NavigationBar(
         modifier = Modifier.height(72.dp),
     ) {
         tabs.forEachIndexed { index, icon ->
             NavigationBarItem(
-                selected = selectedIndex == index,
-                onClick = { selectedIndex = index },
+                selected = selectedIndex.value == index,
+                onClick = { selectedIndex.value = index },
                 icon = {
                     Icon(
                         imageVector = icon,

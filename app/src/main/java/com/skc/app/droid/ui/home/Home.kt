@@ -2,11 +2,10 @@ package com.skc.app.droid.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,43 +16,36 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.skc.app.droid.util.BottomNavBar
 import com.skc.app.droid.viewmodel.HomeViewModel
 
 @Composable
-fun Home(model: HomeViewModel) {
+fun Home(model: HomeViewModel, innerPadding: PaddingValues) {
     LaunchedEffect("Home View Model") {
         model.fetchData()
     }
 
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize(),
-        bottomBar = { BottomNavBar() }
-    ) { innerPadding ->
-        var isRefreshing by remember { mutableStateOf(false) }
+    var isRefreshing by remember { mutableStateOf(false) }
 
-        PullToRefreshBox(
-            isRefreshing = isRefreshing,
-            onRefresh = {
-                isRefreshing = true
-                isRefreshing = false
-            },
-            modifier = Modifier.padding(top = 10.dp)
+    PullToRefreshBox(
+        isRefreshing = isRefreshing,
+        onRefresh = {
+            isRefreshing = true
+            isRefreshing = false
+        },
+        modifier = Modifier.padding(top = 10.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .padding(innerPadding)
+                .padding(horizontal = 15.dp),
+            verticalArrangement = Arrangement.spacedBy(40.dp)
         ) {
-            Column(
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-                    .padding(innerPadding)
-                    .padding(horizontal = 15.dp),
-                verticalArrangement = Arrangement.spacedBy(40.dp)
-            ) {
-                val stats by model.dbStats.collectAsState()
-                val cardOfTheDay by model.cotd.collectAsState()
+            val stats by model.dbStats.collectAsState()
+            val cardOfTheDay by model.cotd.collectAsState()
 
-                DBStats(stats)
-                CardOfTheDay(cotd = cardOfTheDay)
-            }
+            DBStats(stats)
+            CardOfTheDay(cotd = cardOfTheDay)
         }
     }
 }
