@@ -97,6 +97,6 @@ private fun DBMetric(total: String, metric: String) {
 @Composable
 fun DBStatsPreview() {
     SKCTheme {
-        DBStats(DBStats(productTotal = 365, cardTotal = 13017, banListTotal = 85, 10))
+        DBStats(DBStats(productTotal = 365, cardTotal = 13017, banListTotal = 85))
     }
 }

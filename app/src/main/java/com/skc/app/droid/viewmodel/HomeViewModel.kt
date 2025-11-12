@@ -13,19 +13,13 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: YGORepository = YGORepositoryImp()) : ViewModel() {
     private val _dbStats = MutableStateFlow(
-        DBStats(productTotal = 0, cardTotal = 0, banListTotal = 0, yearsOfBanListCoverage = 0)
+        DBStats(productTotal = 0, cardTotal = 0, banListTotal = 0)
     )
     private val _cotd = MutableStateFlow(
         CardOfTheDay(
             date = "",
             version = 0,
-            card = YGOCard(
-                cardID = "",
-                cardColor = "",
-                cardName = "",
-                cardAttribute = "",
-                cardEffect = "",
-            )
+            card = YGOCard.placeholder
         )
     )
 

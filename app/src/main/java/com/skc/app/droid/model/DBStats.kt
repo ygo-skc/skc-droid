@@ -8,5 +8,4 @@ data class DBStats(
     val productTotal: Int,
     val cardTotal: Int,
     val banListTotal: Int,
-    val yearsOfBanListCoverage: Int
 ) : Parcelable
