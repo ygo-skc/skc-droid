@@ -43,7 +43,7 @@ fun BottomNavBar() {
                 alwaysShowLabel = false,
                 colors = NavigationBarItemDefaults.colors(
                     unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
+                    selectedIconColor = MaterialTheme.colorScheme.secondary,
                     indicatorColor = MaterialTheme.colorScheme.secondaryContainer
                 )
             )
