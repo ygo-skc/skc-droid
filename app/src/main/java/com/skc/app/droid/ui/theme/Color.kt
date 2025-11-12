@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 val PrimaryLight = Color(0xFF673ab7)
-val SecondaryLight = Color(0xFF607d8b)
+val SecondaryLight = Color(0xFFff9100)
 val TertiaryLight = Color(0xFFb388ff)
 
 val PrimaryDark = Color(0xFFB9A3FF)
