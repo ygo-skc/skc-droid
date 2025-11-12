@@ -7,6 +7,7 @@ import com.skc.app.droid.model.DBStats
 import com.skc.app.droid.model.YGOCard
 import com.skc.app.droid.repository.YGORepository
 import com.skc.app.droid.repository.YGORepositoryImp
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -28,24 +29,34 @@ class HomeViewModel(private val repository: YGORepository = YGORepositoryImp()) 
 
     fun fetchData() {
         viewModelScope.launch {
-            val res2 = repository.getCardOfTheDay()
-            if (res2.isSuccessful) {
-                val body = res2.body()
-                if (body != null) {
-                    _cotd.value = body
-                }
-            }
+            val dbDeferred = async { fetchDBStatsData() }
+            val cotdDeferred = async { fetchCardOfTheDayData() }
 
-            val response = repository.getDBStats()
-            if (response.isSuccessful) {
-                val body = response.body()
-                if (body != null) {
-                    _dbStats.value = body
-                }
-            } else {
-                val error = response.errorBody()
-                if (error != null) {
-                }
+            dbDeferred.await()
+            cotdDeferred.await()
+        }
+    }
+
+    private suspend fun fetchDBStatsData() {
+        val res = repository.getDBStats()
+        if (res.isSuccessful) {
+            val data = res.body()
+            if (data != null) {
+                _dbStats.value = data
+            }
+        } else {
+            val error = res.errorBody()
+            if (error != null) {
+            }
+        }
+    }
+
+    private suspend fun fetchCardOfTheDayData() {
+        val res = repository.getCardOfTheDay()
+        if (res.isSuccessful) {
+            val data = res.body()
+            if (data != null) {
+                _cotd.value = data
             }
         }
     }

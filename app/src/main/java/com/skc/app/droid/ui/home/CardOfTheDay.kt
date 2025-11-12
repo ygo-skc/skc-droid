@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,7 +23,7 @@ fun CardOfTheDay(cotd: CardOfTheDay) {
     Section(header = "Card of the day") {
         Row(
             modifier = Modifier.padding(10.dp),
-            horizontalArrangement = Arrangement.spacedBy(18.dp)
+            horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             YGOCardImage(length = 85.dp, cardID = cotd.card.cardID, cardColor = cotd.card.cardColor)
             Column(
@@ -38,7 +39,7 @@ fun CardOfTheDay(cotd: CardOfTheDay) {
                     )
                     Text(
                         text = cotd.card.monsterType ?: cotd.card.cardAttribute,
-                        fontWeight = FontWeight.Light,
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
