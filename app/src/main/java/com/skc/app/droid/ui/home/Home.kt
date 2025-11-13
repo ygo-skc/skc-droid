@@ -13,10 +13,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.skc.app.droid.viewmodel.HomeViewModel
 
 @Composable
-fun Home(model: HomeViewModel, innerPadding: PaddingValues) {
+fun Home(
+    model: HomeViewModel = HomeViewModel(),
+    navController: NavHostController,
+    innerPadding: PaddingValues,
+) {
     LaunchedEffect("Home View Model") {
         model.fetchData()
     }

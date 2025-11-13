@@ -43,12 +43,13 @@ class HomeViewModel(
     fun fetchData() {
         _isRefreshing.value = true
         viewModelScope.launch {
-            fetchUpcomingYGOProducts()
             val dbDeferred = async { fetchDBStatsData() }
             val cotdDeferred = async { fetchCardOfTheDayData() }
+            val upcomingDeferred = async { fetchUpcomingYGOProducts() }
 
             dbDeferred.await()
             cotdDeferred.await()
+            upcomingDeferred.await()
             _isRefreshing.value = false
         }
     }
