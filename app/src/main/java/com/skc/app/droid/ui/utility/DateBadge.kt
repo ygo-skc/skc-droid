@@ -23,6 +23,7 @@ import com.skc.app.droid.ui.theme.dateGray
 import com.skc.app.droid.ui.theme.dateRed
 import com.skc.app.droid.util.DatesUtil
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.Locale
 
@@ -33,8 +34,8 @@ private val parentModifier = Modifier
     .width(70.dp)
 
 @Composable
-fun DateBadge(date: String) {
-    val d = LocalDate.parse(date, DatesUtil.SKC_DATE_FORMAT)
+fun DateBadge(date: String, formatter: DateTimeFormatter = DatesUtil.SKC_DATE_FORMAT) {
+    val d = LocalDate.parse(date, formatter)
 
 
     Column(

@@ -1,10 +1,10 @@
 package com.skc.app.droid.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.skc.app.droid.model.CardOfTheDay
 import com.skc.app.droid.model.DBStats
+import com.skc.app.droid.model.Events
 import com.skc.app.droid.model.YGOCard
 import com.skc.app.droid.repository.NextRepository
 import com.skc.app.droid.repository.NextRepositoryImp
@@ -29,13 +29,17 @@ class HomeViewModel(
             card = YGOCard.placeholder
         )
     )
+    private val _upcomingYGOProducts = MutableStateFlow(
+        Events(service = "skc", events = emptyList())
+    )
 
     val dbStats get() = _dbStats.asStateFlow()
     val cotd get() = _cotd.asStateFlow()
+    val upcomingYGOProducts get() = _upcomingYGOProducts.asStateFlow()
 
     fun fetchData() {
         viewModelScope.launch {
-            xxx()
+            fetchUpcomingYGOProducts()
             val dbDeferred = async { fetchDBStatsData() }
             val cotdDeferred = async { fetchCardOfTheDayData() }
 
@@ -47,13 +51,8 @@ class HomeViewModel(
     private suspend fun fetchDBStatsData() {
         val res = ygoRepo.getDBStats()
         if (res.isSuccessful) {
-            val data = res.body()
-            if (data != null) {
-                _dbStats.value = data
-            }
-        } else {
-            val error = res.errorBody()
-            if (error != null) {
+            res.body()?.let {
+                _dbStats.value = it
             }
         }
     }
@@ -61,18 +60,18 @@ class HomeViewModel(
     private suspend fun fetchCardOfTheDayData() {
         val res = ygoRepo.getCardOfTheDay()
         if (res.isSuccessful) {
-            val data = res.body()
-            if (data != null) {
-                _cotd.value = data
+            res.body()?.let {
+                _cotd.value = it
             }
         }
     }
 
-    private suspend fun xxx() {
+    private suspend fun fetchUpcomingYGOProducts() {
         val res = nextRepo.getEvents()
         if (res.isSuccessful) {
-            val data = res.body()
-            Log.i("Temp", data.toString())
+            res.body()?.let {
+                _upcomingYGOProducts.value = it
+            }
         }
     }
 }
