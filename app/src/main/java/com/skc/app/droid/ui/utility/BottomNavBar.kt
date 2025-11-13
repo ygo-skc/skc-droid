@@ -21,9 +21,14 @@ private val tabs = listOf(
     Icons.Filled.Whatshot
 )
 private val screens = listOf(
-    "Home",
-    "Trending"
+    Route.HOME,
+    Route.TRENDING
 )
+
+enum class Route(val value: String) {
+    HOME("home"),
+    TRENDING("trending"),
+}
 
 @Composable
 fun BottomNavBar(navController: NavHostController) {
@@ -37,7 +42,7 @@ fun BottomNavBar(navController: NavHostController) {
                 selected = selectedIndex.value == index,
                 onClick = {
                     selectedIndex.value = index
-                    navController.navigate(screens[index])
+                    navController.navigate(route = screens[index].value)
                 },
                 icon = {
                     Icon(
