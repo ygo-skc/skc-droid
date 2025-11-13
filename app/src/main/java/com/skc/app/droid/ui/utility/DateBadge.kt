@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -31,12 +32,11 @@ private val parentModifier = Modifier
     .clip(
         RoundedCornerShape(corner = CornerSize(10.dp))
     )
-    .width(70.dp)
+    .width(60.dp)
 
 @Composable
 fun DateBadge(date: String, formatter: DateTimeFormatter = DatesUtil.SKC_DATE_FORMAT) {
     val d = LocalDate.parse(date, formatter)
-
 
     Column(
         modifier = parentModifier
@@ -47,7 +47,8 @@ fun DateBadge(date: String, formatter: DateTimeFormatter = DatesUtil.SKC_DATE_FO
             text = d.month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH),
             modifier = Modifier
                 .fillMaxWidth()
-                .background(color = dateRed()),
+                .background(color = dateRed())
+                .padding(vertical = 2.dp),
             textAlign = TextAlign.Center,
             color = Color.White,
             style = MaterialTheme.typography.labelLarge
@@ -62,7 +63,6 @@ fun DateBadge(date: String, formatter: DateTimeFormatter = DatesUtil.SKC_DATE_FO
             )
             Text(
                 text = d.year.toString(),
-                fontWeight = FontWeight.Light,
                 style = MaterialTheme.typography.labelSmall
             )
         }
