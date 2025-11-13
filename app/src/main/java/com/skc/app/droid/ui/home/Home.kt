@@ -11,9 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.skc.app.droid.viewmodel.HomeViewModel
@@ -24,13 +21,15 @@ fun Home(model: HomeViewModel, innerPadding: PaddingValues) {
         model.fetchData()
     }
 
-    var isRefreshing by remember { mutableStateOf(false) }
+    val isRefreshing by model.isRefreshing.collectAsState()
+    val stats by model.dbStats.collectAsState()
+    val cardOfTheDay by model.cotd.collectAsState()
+    val upcomingYGOProducts by model.upcomingYGOProducts.collectAsState()
 
     PullToRefreshBox(
         isRefreshing = isRefreshing,
         onRefresh = {
-            isRefreshing = true
-            isRefreshing = false
+            model.fetchData()
         },
         modifier = Modifier.padding(top = 10.dp)
     ) {
@@ -41,10 +40,6 @@ fun Home(model: HomeViewModel, innerPadding: PaddingValues) {
                 .padding(horizontal = 15.dp),
             verticalArrangement = Arrangement.spacedBy(40.dp)
         ) {
-            val stats by model.dbStats.collectAsState()
-            val cardOfTheDay by model.cotd.collectAsState()
-            val upcomingYGOProducts by model.upcomingYGOProducts.collectAsState()
-
             DBStats(stats)
             CardOfTheDay(cotd = cardOfTheDay)
             UpcomingTCGProducts(upcomingYGOProducts)

@@ -19,6 +19,8 @@ class HomeViewModel(
     private val ygoRepo: YGORepository = YGORepositoryImp(),
     private val nextRepo: NextRepository = NextRepositoryImp(),
 ) : ViewModel() {
+    private val _isRefreshing = MutableStateFlow(true)
+
     private val _dbStats = MutableStateFlow(
         DBStats(productTotal = 0, cardTotal = 0, banListTotal = 0)
     )
@@ -33,11 +35,13 @@ class HomeViewModel(
         Events(service = "skc", events = emptyList())
     )
 
+    val isRefreshing get() = _isRefreshing.asStateFlow()
     val dbStats get() = _dbStats.asStateFlow()
     val cotd get() = _cotd.asStateFlow()
     val upcomingYGOProducts get() = _upcomingYGOProducts.asStateFlow()
 
     fun fetchData() {
+        _isRefreshing.value = true
         viewModelScope.launch {
             fetchUpcomingYGOProducts()
             val dbDeferred = async { fetchDBStatsData() }
@@ -45,6 +49,7 @@ class HomeViewModel(
 
             dbDeferred.await()
             cotdDeferred.await()
+            _isRefreshing.value = false
         }
     }
 
