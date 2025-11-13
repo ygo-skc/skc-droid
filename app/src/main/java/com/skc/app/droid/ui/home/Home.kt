@@ -18,7 +18,7 @@ import com.skc.app.droid.viewmodel.HomeViewModel
 
 @Composable
 fun Home(
-    model: HomeViewModel = HomeViewModel(),
+    model: HomeViewModel,
     navController: NavHostController,
     innerPadding: PaddingValues,
 ) {
