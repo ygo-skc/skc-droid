@@ -26,3 +26,17 @@ data class YGOCard(
         )
     }
 }
+
+@Parcelize
+data class DBStats(
+    val productTotal: Int,
+    val cardTotal: Int,
+    val banListTotal: Int,
+) : Parcelable
+
+@Parcelize
+data class CardOfTheDay(
+    val date: String,
+    val version: Int,
+    val card: YGOCard,
+) : Parcelable
