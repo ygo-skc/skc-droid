@@ -63,6 +63,8 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
 
+    implementation(libs.compose.markdown)
+
     testImplementation(libs.junit)
 
     androidTestImplementation(libs.androidx.junit)
