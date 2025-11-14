@@ -41,7 +41,7 @@ private fun link(): Color {
 
 @Composable
 private fun spell(): Color {
-    return if (isSystemInDarkTheme()) Color(0xFF00bfa5) else Color(0xFF00796b)
+    return if (isSystemInDarkTheme()) Color(0xFF00bfa5) else Color(0xFF009688)
 }
 
 @Composable
