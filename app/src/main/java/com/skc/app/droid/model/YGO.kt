@@ -40,3 +40,16 @@ data class CardOfTheDay(
     val version: Int,
     val card: YGOCard,
 ) : Parcelable
+
+@Parcelize
+data class TrendingData(
+    val resourceName: String,
+    val metrics: List<TrendingMetric>
+) : Parcelable
+
+@Parcelize
+data class TrendingMetric(
+    val resource: YGOCard,
+    val occurrences: Int,
+    val change: Int,
+) : Parcelable
