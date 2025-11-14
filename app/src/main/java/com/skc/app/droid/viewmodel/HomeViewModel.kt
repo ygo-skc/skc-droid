@@ -41,6 +41,10 @@ class HomeViewModel(
     val upcomingYGOProducts get() = _upcomingYGOProducts.asStateFlow()
 
     fun fetchData() {
+        if (_dbStats.value.cardTotal != 0) {
+            return
+        }
+
         _isRefreshing.value = true
         viewModelScope.launch {
             val dbDeferred = async { fetchDBStatsData() }
