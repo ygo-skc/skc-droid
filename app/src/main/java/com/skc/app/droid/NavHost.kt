@@ -17,7 +17,7 @@ fun CustomNavHost(navController: NavHostController, innerPadding: PaddingValues)
 
     NavHost(
         navController = navController,
-        startDestination = "Home"
+        startDestination = "Home",
     ) {
         composable(route = Route.HOME.value) {
             Home(

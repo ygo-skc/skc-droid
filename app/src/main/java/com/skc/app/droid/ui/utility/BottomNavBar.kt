@@ -16,10 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 
-private val tabs = listOf(
-    Icons.Default.Home,
-    Icons.Filled.Whatshot
-)
 private val screens = listOf(
     Route.HOME,
     Route.TRENDING
@@ -28,6 +24,9 @@ private val screens = listOf(
 enum class Route(val value: String) {
     HOME("home"),
     TRENDING("trending"),
+enum class Route(val value: String, val tabImage: ImageVector) {
+    HOME("home", Icons.Default.Home),
+    TRENDING("trending", Icons.Filled.Whatshot),
 }
 
 @Composable
