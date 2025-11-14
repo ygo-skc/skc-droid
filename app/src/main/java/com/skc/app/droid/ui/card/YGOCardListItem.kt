@@ -22,12 +22,13 @@ fun YGOCardListItem(card: YGOCard) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(all = 10.dp), horizontalArrangement = Arrangement.spacedBy(15.dp)
+                .padding(all = 10.dp),
+            horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             YGOCardImage(
-                length = 60.dp,
+                length = 70.dp,
                 cardID = card.cardID,
-                imageSize = YGOImageSize.EX_SMALL,
+                imageSize = YGOImageSize.TINY,
                 variant = YGOCardImageVariant.ROUNDED_CORNER
             )
             Column {
@@ -35,7 +36,17 @@ fun YGOCardListItem(card: YGOCard) {
                     text = card.cardName,
                     fontWeight = FontWeight.Medium,
                 )
-                Text(text = card.monsterType ?: card.cardAttribute)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(text = card.monsterType ?: card.cardAttribute)
+                    Text(
+                        text = card.cardID,
+                        fontWeight = FontWeight.Light,
+                    )
+                }
             }
         }
     }
