@@ -10,20 +10,18 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 private val screens = listOf(
     Route.HOME,
     Route.TRENDING
 )
 
-enum class Route(val value: String) {
-    HOME("home"),
-    TRENDING("trending"),
 enum class Route(val value: String, val tabImage: ImageVector) {
     HOME("home", Icons.Default.Home),
     TRENDING("trending", Icons.Filled.Whatshot),
@@ -31,21 +29,27 @@ enum class Route(val value: String, val tabImage: ImageVector) {
 
 @Composable
 fun BottomNavBar(navController: NavHostController) {
-    val selectedIndex = remember { mutableIntStateOf(0) }
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
 
     NavigationBar(
         modifier = Modifier.height(72.dp),
     ) {
-        tabs.forEachIndexed { index, icon ->
+        screens.forEach { screen ->
             NavigationBarItem(
-                selected = selectedIndex.value == index,
+                selected = currentDestination?.route == screen.value,
                 onClick = {
-                    selectedIndex.value = index
-                    navController.navigate(route = screens[index].value)
+                    navController.navigate(route = screen.value) {
+                        popUpTo(Route.HOME.value) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 },
                 icon = {
                     Icon(
-                        imageVector = icon,
+                        imageVector = screen.tabImage,
                         contentDescription = null
                     )
                 },
