@@ -97,8 +97,8 @@ private fun TrendingSummary(change: Int, occurrences: Int) {
         else -> "Trending down"
     }
     val changeColor = when {
-        change > 0 -> Color(0xFF00c853)
-        change == 0 -> Color(0xFFffeb3b)
+        change > 0 -> Color(0xFF43a047)
+        change == 0 -> Color(0xFFfdd835)
         else -> Color(0xFFff1744)
     }
 
