@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.skc.app.droid.model.YGOCard
 import com.skc.app.droid.model.YGOCardImageVariant
 import com.skc.app.droid.model.YGOImageSize
+import com.skc.app.droid.ui.card.components.Attribute
 import com.skc.app.droid.ui.utility.CardColorIndicatorView
 import com.skc.app.droid.ui.utility.YGOCardImage
 
@@ -50,15 +51,16 @@ fun YGOCardListItem(card: YGOCard) {
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(text = card.monsterType ?: card.cardAttribute)
+                    Text(text = card.monsterType ?: card.attribute.value)
                     Text(
                         text = card.cardID,
                         fontWeight = FontWeight.Light,
                         style = MaterialTheme.typography.bodySmall
                     )
                 }
-                Row {
+                Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
                     CardColorIndicatorView(cardColor = card.cardColor)
+                    Attribute(attribute = card.attribute)
                 }
             }
         }

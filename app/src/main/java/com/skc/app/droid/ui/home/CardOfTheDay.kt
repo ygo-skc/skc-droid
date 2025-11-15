@@ -12,7 +12,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.skc.app.droid.model.CardOfTheDay
+import com.skc.app.droid.model.YGOAttribute
 import com.skc.app.droid.model.YGOCard
+import com.skc.app.droid.model.YGOImageSize
 import com.skc.app.droid.ui.theme.SKCTheme
 import com.skc.app.droid.ui.utility.InlineDate
 import com.skc.app.droid.ui.utility.Section
@@ -28,7 +30,8 @@ fun CardOfTheDay(cotd: CardOfTheDay) {
             YGOCardImage(
                 length = 95.dp,
                 cardID = cotd.card.cardID,
-                cardColor = cotd.card.cardColor
+                cardColor = cotd.card.cardColor,
+                imageSize = YGOImageSize.X_SMALL
             )
             Column(
                 verticalArrangement = Arrangement.spacedBy(2.dp)
@@ -42,7 +45,7 @@ fun CardOfTheDay(cotd: CardOfTheDay) {
                         fontWeight = FontWeight.Medium
                     )
                     Text(
-                        text = cotd.card.monsterType ?: cotd.card.cardAttribute,
+                        text = cotd.card.monsterType ?: cotd.card.attribute.value,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 }
@@ -63,7 +66,7 @@ fun CardOfTheDayPreview() {
                     cardID = "89943723",
                     cardColor = "Normal",
                     cardName = "Elemental HERO Neos",
-                    cardAttribute = "Light",
+                    cardAttribute = YGOAttribute.LIGHT,
                     cardEffect = "None",
                     monsterType = "Warrior/Normal",
                     monsterAttack = 2500,
