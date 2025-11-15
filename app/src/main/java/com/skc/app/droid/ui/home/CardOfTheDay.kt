@@ -1,13 +1,16 @@
 package com.skc.app.droid.ui.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -21,17 +24,21 @@ import com.skc.app.droid.ui.utility.Section
 import com.skc.app.droid.ui.utility.YGOCardImage
 
 @Composable
-fun CardOfTheDay(cotd: CardOfTheDay) {
+fun CardOfTheDay(cotd: CardOfTheDay, onClick: () -> Unit = {}) {
+    LocalContext.current
     Section(header = "Card of the day") {
         Row(
-            modifier = Modifier.padding(10.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable(onClick = onClick)
+                .padding(10.dp),
             horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             YGOCardImage(
                 length = 95.dp,
                 cardID = cotd.card.cardID,
                 cardColor = cotd.card.cardColor,
-                imageSize = YGOImageSize.X_SMALL
+                imageSize = YGOImageSize.TINY
             )
             Column(
                 verticalArrangement = Arrangement.spacedBy(2.dp)

@@ -1,9 +1,6 @@
 package com.skc.app.droid.ui.utility
 
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Whatshot
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -12,20 +9,15 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.skc.app.droid.Route
 
 private val screens = listOf(
     Route.HOME,
     Route.TRENDING
 )
-
-enum class Route(val value: String, val tabImage: ImageVector) {
-    HOME("home", Icons.Default.Home),
-    TRENDING("trending", Icons.Filled.Whatshot),
-}
 
 @Composable
 fun BottomNavBar(navController: NavHostController) {
