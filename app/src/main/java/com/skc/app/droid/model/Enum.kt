@@ -1,6 +1,5 @@
 package com.skc.app.droid.model
 
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.Modifier
@@ -27,8 +26,8 @@ enum class YGOAttribute(val value: String, val drawable: Int) {
     @SerializedName("Earth")
     EARTH(value = "Earth", drawable = R.drawable.earth_attribute),
 
-//    @SerializedName("Water")
-//    WATER(value = "Water", drawable = R.drawable.water_attribute),
+    @SerializedName("Water")
+    WATER(value = "Water", drawable = R.drawable.water_attribute),
 
     @SerializedName("Fire")
     FIRE(value = "Fire", drawable = R.drawable.fire_attribute),
@@ -67,7 +66,6 @@ enum class IconModifier(val modifier: Modifier) {
         modifier = Modifier
             .size(23.dp)
             .clip(CircleShape)
-            .aspectRatio(1f),
     ),
     LARGE(modifier = Modifier.size(30.dp)),
 }
