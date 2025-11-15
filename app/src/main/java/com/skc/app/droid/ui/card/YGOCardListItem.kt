@@ -22,45 +22,54 @@ import com.skc.app.droid.ui.utility.CardColorIndicatorView
 import com.skc.app.droid.ui.utility.YGOCardImage
 
 @Composable
-fun YGOCardListItem(card: YGOCard) {
+fun YGOCardListItem(
+    card: YGOCard,
+    header: @Composable() () -> Unit = {}
+) {
     OutlinedCard {
-        Row(
+        Column(
             modifier = Modifier
                 .padding(all = 10.dp),
-            horizontalArrangement = Arrangement.spacedBy(15.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalArrangement = Arrangement.spacedBy(3.dp)
         ) {
-            YGOCardImage(
-                length = 70.dp,
-                cardID = card.cardID,
-                imageSize = YGOImageSize.TINY,
-                variant = YGOCardImageVariant.ROUNDED_CORNER
-            )
-            Column(
-                modifier = Modifier.align(Alignment.Top)
+            header()
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(15.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = card.cardName,
-                    fontWeight = FontWeight.Medium,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                YGOCardImage(
+                    length = 70.dp,
+                    cardID = card.cardID,
+                    imageSize = YGOImageSize.TINY,
+                    variant = YGOCardImageVariant.ROUNDED_CORNER
                 )
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                Column(
+                    modifier = Modifier.align(Alignment.Top)
                 ) {
-                    Text(text = card.monsterType ?: card.attribute.value)
                     Text(
-                        text = card.cardID,
-                        fontWeight = FontWeight.Light,
-                        style = MaterialTheme.typography.bodySmall
+                        text = card.cardName,
+                        fontWeight = FontWeight.Medium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
-                }
-                Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                    CardColorIndicatorView(cardColor = card.cardColor)
-                    Attribute(attribute = card.attribute)
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(text = card.monsterType ?: card.attribute.value)
+                        Text(
+                            text = card.cardID,
+                            fontWeight = FontWeight.Light,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+                    Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                        CardColorIndicatorView(cardColor = card.cardColor)
+                        Attribute(attribute = card.attribute)
+                    }
                 }
             }
         }
