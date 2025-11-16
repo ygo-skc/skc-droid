@@ -17,6 +17,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.skc.app.droid.Route
 import com.skc.app.droid.viewmodel.HomeViewModel
+import java.time.LocalDateTime
 
 @Composable
 fun Home(
@@ -28,13 +29,13 @@ fun Home(
         model.fetchData()
     }
 
-    val isRefreshing by model.isRefreshing.collectAsState()
+    val isFetchingData by model.isFetchingData.collectAsState()
     val stats by model.dbStats.collectAsState()
     val cardOfTheDay by model.cotd.collectAsState()
     val upcomingYGOProducts by model.upcomingYGOProducts.collectAsState()
 
     PullToRefreshBox(
-        isRefreshing = isRefreshing,
+        isRefreshing = isFetchingData && model.lastFetchTimestamp != LocalDateTime.MIN,
         onRefresh = {
             model.fetchData()
         },
