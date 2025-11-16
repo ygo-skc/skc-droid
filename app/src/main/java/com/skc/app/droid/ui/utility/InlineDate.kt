@@ -23,7 +23,7 @@ import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.Locale
 
-private val padding = PaddingValues(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
+private val padding = PaddingValues(start = 8.dp, end = 8.dp, top = 3.dp, bottom = 3.dp)
 
 @Composable
 fun InlineDate(date: String) {
