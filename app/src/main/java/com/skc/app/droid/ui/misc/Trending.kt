@@ -79,7 +79,8 @@ fun Trending(
                 }) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         TrendingSummary(
                             change = trendingMetric.change,
@@ -114,14 +115,20 @@ private fun TrendingSummary(change: Int, occurrences: Int) {
         else -> Color(0xFFff1744)
     }
 
-    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+    val iconModifier = Modifier.size(20.dp)
+
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(3.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                changeIcon, changeIconDescription,
-                modifier = Modifier.size(18.dp),
+                imageVector = changeIcon,
+                contentDescription = changeIconDescription,
+                modifier = iconModifier,
                 tint = changeColor,
             )
             Text(
@@ -136,8 +143,9 @@ private fun TrendingSummary(change: Int, occurrences: Int) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                Icons.Default.BarChart, "Bar chart",
-                modifier = Modifier.size(18.dp)
+                imageVector = Icons.Default.BarChart,
+                contentDescription = "Bar chart",
+                modifier = iconModifier,
             )
             Text(
                 text = occurrences.toString(),

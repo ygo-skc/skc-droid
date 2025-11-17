@@ -69,7 +69,7 @@ fun YGOCardListItem(
                             style = MaterialTheme.typography.bodySmall
                         )
                     }
-                    Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         CardColorIndicatorView(cardColor = card.cardColor)
                         Attribute(attribute = card.attribute)
                     }
