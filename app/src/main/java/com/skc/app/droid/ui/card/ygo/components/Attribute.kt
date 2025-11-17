@@ -1,4 +1,4 @@
-package com.skc.app.droid.ui.card.components
+package com.skc.app.droid.ui.card.ygo.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.material.icons.Icons

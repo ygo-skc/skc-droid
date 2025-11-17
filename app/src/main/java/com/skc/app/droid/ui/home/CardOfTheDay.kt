@@ -35,7 +35,7 @@ fun CardOfTheDay(cotd: CardOfTheDay, onClick: () -> Unit = {}) {
             horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             YGOCardImage(
-                length = 95.dp,
+                size = 95.dp,
                 cardID = cotd.card.cardID,
                 cardColor = cotd.card.cardColor,
                 imageSize = YGOImageSize.TINY

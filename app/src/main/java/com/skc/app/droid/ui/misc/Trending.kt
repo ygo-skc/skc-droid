@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.skc.app.droid.Route
-import com.skc.app.droid.ui.card.YGOCardListItem
+import com.skc.app.droid.ui.card.ygo.YGOCardListItem
 import com.skc.app.droid.viewmodel.TrendingViewModel
 
 @Composable

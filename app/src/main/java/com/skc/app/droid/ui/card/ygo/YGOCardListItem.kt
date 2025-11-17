@@ -1,4 +1,4 @@
-package com.skc.app.droid.ui.card
+package com.skc.app.droid.ui.card.ygo
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.skc.app.droid.model.YGOCard
 import com.skc.app.droid.model.YGOCardImageVariant
 import com.skc.app.droid.model.YGOImageSize
-import com.skc.app.droid.ui.card.components.Attribute
+import com.skc.app.droid.ui.card.ygo.components.Attribute
 import com.skc.app.droid.ui.utility.CardColorIndicatorView
 import com.skc.app.droid.ui.utility.YGOCardImage
 
@@ -42,7 +42,7 @@ fun YGOCardListItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 YGOCardImage(
-                    length = 70.dp,
+                    size = 70.dp,
                     cardID = card.cardID,
                     imageSize = YGOImageSize.TINY,
                     variant = YGOCardImageVariant.ROUNDED_CORNER

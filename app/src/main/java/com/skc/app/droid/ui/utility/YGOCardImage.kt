@@ -2,9 +2,7 @@ package com.skc.app.droid.ui.utility
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,7 +18,7 @@ import com.skc.app.droid.ui.theme.cardColorUI
 
 @Composable
 fun YGOCardImage(
-    length: Dp,
+    size: Dp,
     cardID: String,
     cardColor: String? = null,
     imageSize: YGOImageSize = YGOImageSize.SMALL,
@@ -28,7 +26,7 @@ fun YGOCardImage(
 ) {
     Box(
         modifier = Modifier
-            .size(length)
+            .size(size)
             .then(
                 cardColor?.let {
                     Modifier
@@ -46,13 +44,12 @@ fun YGOCardImage(
             model = "https://images.thesupremekingscastle.com/cards/${imageSize.value}/$cardID.jpg",
             contentDescription = "Card Image",
             modifier = Modifier
-                .width(length)
-                .height(length)
+                .size(size = size)
                 .clip(
-                    if (variant == YGOCardImageVariant.ROUND)
-                        RoundedCornerShape(corner = CornerSize(length / 2)) else RoundedCornerShape(
+                    shape = if (variant == YGOCardImageVariant.ROUND)
+                        RoundedCornerShape(corner = CornerSize(size / 2)) else RoundedCornerShape(
                         corner = CornerSize(
-                            length / 10
+                            size / 10
                         )
                     )
                 )
