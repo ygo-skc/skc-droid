@@ -39,22 +39,20 @@ class HomeViewModel(
     val upcomingYGOProducts get() = _upcomingYGOProducts.asStateFlow()
 
 
-    fun fetchData() {
-        if (!lastFetchTimestamp.isDateInvalidated()) {
-            return
-        }
+    fun fetchData(forceRefresh: Boolean) {
+        if (lastFetchTimestamp == LocalDateTime.MIN || (forceRefresh && lastFetchTimestamp.isDateInvalidated())) {
+            _isFetchingData.value = true
+            viewModelScope.launch {
+                val dbDeferred = async { fetchDBStatsData() }
+                val cotdDeferred = async { fetchCardOfTheDayData() }
+                val upcomingDeferred = async { fetchUpcomingYGOProducts() }
 
-        _isFetchingData.value = true
-        viewModelScope.launch {
-            val dbDeferred = async { fetchDBStatsData() }
-            val cotdDeferred = async { fetchCardOfTheDayData() }
-            val upcomingDeferred = async { fetchUpcomingYGOProducts() }
-
-            dbDeferred.await()
-            cotdDeferred.await()
-            upcomingDeferred.await()
-            _isFetchingData.value = false
-            lastFetchTimestamp = LocalDateTime.now()
+                dbDeferred.await()
+                cotdDeferred.await()
+                upcomingDeferred.await()
+                _isFetchingData.value = false
+                lastFetchTimestamp = LocalDateTime.now()
+            }
         }
     }
 

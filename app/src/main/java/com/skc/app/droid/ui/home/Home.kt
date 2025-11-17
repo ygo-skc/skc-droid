@@ -26,7 +26,7 @@ fun Home(
 ) {
     val model: HomeViewModel = viewModel()
     LaunchedEffect("Home View Model") {
-        model.fetchData()
+        model.fetchData(forceRefresh = false)
     }
 
     val isFetchingData by model.isFetchingData.collectAsState()
@@ -37,7 +37,7 @@ fun Home(
     PullToRefreshBox(
         isRefreshing = isFetchingData && model.lastFetchTimestamp != LocalDateTime.MIN,
         onRefresh = {
-            model.fetchData()
+            model.fetchData(forceRefresh = true)
         },
         modifier = Modifier.padding(top = 10.dp)
     ) {
