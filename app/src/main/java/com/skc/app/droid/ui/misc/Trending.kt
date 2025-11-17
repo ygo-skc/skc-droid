@@ -29,11 +29,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import com.skc.app.droid.Route
 import com.skc.app.droid.ui.card.YGOCardListItem
 import com.skc.app.droid.viewmodel.TrendingViewModel
 
 @Composable
-fun Trending(innerPadding: PaddingValues) {
+fun Trending(
+    navController: NavHostController,
+    innerPadding: PaddingValues,
+) {
     val model: TrendingViewModel = viewModel()
 
     val isFetching by model.isFetching.collectAsState()
@@ -64,7 +69,14 @@ fun Trending(innerPadding: PaddingValues) {
             )
         } else {
             model.trendingCards.forEachIndexed { ind, trendingMetric ->
-                YGOCardListItem(card = trendingMetric.resource) {
+                YGOCardListItem(card = trendingMetric.resource, onClick = {
+                    navController.navigate(
+                        Route.YGO_CARD.value.replace(
+                            "{cardID}",
+                            trendingMetric.resource.cardID
+                        )
+                    )
+                }) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween

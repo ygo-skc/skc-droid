@@ -1,5 +1,6 @@
 package com.skc.app.droid.ui.card
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,11 +25,13 @@ import com.skc.app.droid.ui.utility.YGOCardImage
 @Composable
 fun YGOCardListItem(
     card: YGOCard,
+    onClick: () -> Unit = {},
     header: @Composable() () -> Unit = {}
 ) {
     OutlinedCard {
         Column(
             modifier = Modifier
+                .clickable(onClick = onClick)
                 .padding(all = 10.dp),
             verticalArrangement = Arrangement.spacedBy(3.dp)
         ) {

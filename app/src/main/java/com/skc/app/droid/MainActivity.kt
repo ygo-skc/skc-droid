@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
                                 .fillMaxSize(),
                             bottomBar = { BottomNavBar(navController = navController) }
                         ) { innerPadding ->
-                            Trending(innerPadding)
+                            Trending(navController = navController, innerPadding)
                         }
                     }
 
