@@ -30,7 +30,7 @@ class HomeViewModel(
     private val _upcomingYGOProducts =
         MutableStateFlow(value = Events(service = "skc", events = emptyList()))
 
-    var lastFetchTimestamp = LocalDateTime.MIN
+    var lastFetchTimestamp: LocalDateTime = LocalDateTime.MIN
         private set
 
     val isFetchingData get() = _isFetchingData.asStateFlow()
@@ -50,8 +50,8 @@ class HomeViewModel(
                 dbDeferred.await()
                 cotdDeferred.await()
                 upcomingDeferred.await()
-                _isFetchingData.value = false
                 lastFetchTimestamp = LocalDateTime.now()
+                _isFetchingData.value = false
             }
         }
     }
