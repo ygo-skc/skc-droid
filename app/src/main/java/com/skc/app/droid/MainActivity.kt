@@ -4,15 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.QuestionMark
 import androidx.compose.material.icons.filled.Whatshot
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavType
@@ -20,6 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.skc.app.droid.ui.card.ygo.Card
 import com.skc.app.droid.ui.home.Home
 import com.skc.app.droid.ui.misc.Trending
 import com.skc.app.droid.ui.theme.SKCTheme
@@ -76,9 +74,10 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier
                                 .fillMaxSize(),
                         ) { innerPadding ->
-                            Column(modifier = Modifier.padding(paddingValues = innerPadding)) {
-                                Text("Card ID: ${entry.arguments?.getString("cardID")}")
-                            }
+                            Card(
+                                cardID = entry.arguments?.getString("cardID") ?: "",
+                                innerPadding = innerPadding
+                            )
                         }
                     }
                 }
