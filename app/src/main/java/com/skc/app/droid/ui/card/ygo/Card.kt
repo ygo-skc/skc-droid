@@ -2,8 +2,6 @@ package com.skc.app.droid.ui.card.ygo
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
@@ -14,11 +12,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.MutableCreationExtras
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.skc.app.droid.ui.card.ygo.components.Stats
 import com.skc.app.droid.viewmodel.CardViewModel
+import com.skc.app.droid.x.parent
 
 @Composable
 fun Card(cardID: String, innerPadding: PaddingValues) {
@@ -35,10 +33,8 @@ fun Card(cardID: String, innerPadding: PaddingValues) {
 
     Column(
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
-            .fillMaxSize()
-            .padding(innerPadding)
-            .padding(horizontal = 15.dp),
+            .parent(innerPadding)
+            .verticalScroll(rememberScrollState()),
     ) {
         if (isFetching) {
             CircularProgressIndicator(

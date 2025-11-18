@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -33,6 +32,7 @@ import androidx.navigation.NavHostController
 import com.skc.app.droid.Route
 import com.skc.app.droid.ui.card.ygo.YGOCardListItem
 import com.skc.app.droid.viewmodel.TrendingViewModel
+import com.skc.app.droid.x.parent
 
 @Composable
 fun Trending(
@@ -46,12 +46,7 @@ fun Trending(
         model.fetchData()
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(innerPadding)
-            .padding(horizontal = 15.dp)
-    ) {
+    Box(modifier = Modifier.parent(innerPadding)) {
         if (isFetching) {
             CircularProgressIndicator(
                 trackColor = MaterialTheme.colorScheme.primaryContainer,

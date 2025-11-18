@@ -3,7 +3,6 @@ package com.skc.app.droid.ui.home
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
@@ -17,6 +16,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.skc.app.droid.Route
 import com.skc.app.droid.viewmodel.HomeViewModel
+import com.skc.app.droid.x.parent
 import java.time.LocalDateTime
 
 @Composable
@@ -39,13 +39,11 @@ fun Home(
         onRefresh = {
             model.fetchData(forceRefresh = true)
         },
-        modifier = Modifier.padding(top = 10.dp)
     ) {
         Column(
             modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .padding(innerPadding)
-                .padding(horizontal = 15.dp),
+                .parent(innerPadding)
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(40.dp)
         ) {
             DBStats(stats)
