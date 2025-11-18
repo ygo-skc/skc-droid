@@ -67,19 +67,21 @@ fun Stats(card: YGOCard) {
                         color = Color.Black,
                         style = MaterialTheme.typography.bodySmall,
                     )
-                    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Text(
-                            text = card.monsterAttack.toString(),
-                            fontWeight = FontWeight.Normal,
-                            color = Color.Black,
-                            style = MaterialTheme.typography.bodySmall,
-                        )
-                        Text(
-                            text = card.monsterDefense.toString(),
-                            fontWeight = FontWeight.Normal,
-                            color = Color.Black,
-                            style = MaterialTheme.typography.bodySmall,
-                        )
+                    if (card.isMonster) {
+                        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                            Text(
+                                text = card.monsterAttack.toString(),
+                                fontWeight = FontWeight.Normal,
+                                color = Color.Black,
+                                style = MaterialTheme.typography.bodySmall,
+                            )
+                            Text(
+                                text = card.monsterDefense.toString(),
+                                fontWeight = FontWeight.Normal,
+                                color = Color.Black,
+                                style = MaterialTheme.typography.bodySmall,
+                            )
+                        }
                     }
                 }
             }

@@ -17,6 +17,10 @@ data class YGOCard(
     val attribute: YGOAttribute
         get() = cardAttribute ?: YGOAttribute.UNKNOWN
 
+    val isMonster: Boolean
+        get() = !(cardColor.equals("spell", ignoreCase = true)
+                || cardColor.equals("spell", ignoreCase = true))
+
     companion object {
         val placeholder = YGOCard(
             cardID = "XXXXXXXX",
