@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.QuestionMark
@@ -15,6 +16,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.skc.app.droid.ui.card.ygo.Card
@@ -36,47 +38,39 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
+            val currentRoute =
+                navController.currentBackStackEntryAsState().value?.destination?.route
 
             SKCTheme {
-                NavHost(
-                    navController = navController,
-                    startDestination = "Home",
-                ) {
-                    composable(route = Route.HOME.value) {
-                        Scaffold(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            bottomBar = { BottomNavBar(navController = navController) }
-                        ) { innerPadding ->
-                            Home(
-                                navController = navController,
-                                innerPadding = innerPadding
-                            )
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    bottomBar = {
+                        if (currentRoute in listOf(Route.HOME.value, Route.TRENDING.value)) {
+                            BottomNavBar(navController = navController)
                         }
                     }
-
-                    composable(route = Route.TRENDING.value) {
-                        Scaffold(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            bottomBar = { BottomNavBar(navController = navController) }
-                        ) { innerPadding ->
-                            Trending(navController = navController, innerPadding)
+                ) { innerPadding ->
+                    NavHost(
+                        navController = navController,
+                        startDestination = Route.HOME.value,
+                        modifier = Modifier.padding(innerPadding)
+                    ) {
+                        composable(route = Route.HOME.value) {
+                            Home(navController = navController)
                         }
-                    }
 
-                    composable(
-                        route = Route.YGO_CARD.value,
-                        arguments = listOf(
-                            navArgument("cardID") { type = NavType.StringType }
-                        )) { entry ->
-                        Scaffold(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                        ) { innerPadding ->
+                        composable(route = Route.TRENDING.value) {
+                            Trending(navController = navController)
+                        }
+
+                        composable(
+                            route = Route.YGO_CARD.value,
+                            arguments = listOf(
+                                navArgument("cardID") { type = NavType.StringType }
+                            ),
+                        ) { entry ->
                             Card(
-                                cardID = entry.arguments?.getString("cardID") ?: "",
-                                innerPadding = innerPadding
+                                cardID = entry.arguments?.getString("cardID") ?: ""
                             )
                         }
                     }

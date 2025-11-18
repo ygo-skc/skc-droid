@@ -2,7 +2,6 @@ package com.skc.app.droid.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
@@ -21,8 +20,7 @@ import java.time.LocalDateTime
 
 @Composable
 fun Home(
-    navController: NavHostController,
-    innerPadding: PaddingValues,
+    navController: NavHostController
 ) {
     val model: HomeViewModel = viewModel()
     LaunchedEffect("Home View Model") {
@@ -42,7 +40,7 @@ fun Home(
     ) {
         Column(
             modifier = Modifier
-                .parent(innerPadding)
+                .parent()
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(40.dp)
         ) {

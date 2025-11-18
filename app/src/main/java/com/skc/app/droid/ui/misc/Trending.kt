@@ -2,7 +2,6 @@ package com.skc.app.droid.ui.misc
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,7 +36,6 @@ import com.skc.app.droid.x.parent
 @Composable
 fun Trending(
     navController: NavHostController,
-    innerPadding: PaddingValues,
 ) {
     val model: TrendingViewModel = viewModel()
     val isFetching by model.isFetching.collectAsState()
@@ -46,7 +44,7 @@ fun Trending(
         model.fetchData()
     }
 
-    Box(modifier = Modifier.parent(innerPadding)) {
+    Box(modifier = Modifier.parent()) {
         if (isFetching) {
             CircularProgressIndicator(
                 trackColor = MaterialTheme.colorScheme.primaryContainer,
