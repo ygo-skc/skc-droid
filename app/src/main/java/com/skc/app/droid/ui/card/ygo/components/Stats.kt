@@ -75,7 +75,7 @@ fun Stats(card: YGOCard) {
                     text = card.cardEffect,
                     modifier = Modifier.padding(bottom = 5.dp),
                     color = Color.Black,
-                    style = MaterialTheme.typography.bodySmall,
+                    style = MaterialTheme.typography.bodyMedium,
                 )
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -85,7 +85,7 @@ fun Stats(card: YGOCard) {
                         text = card.cardID,
                         fontWeight = FontWeight.Normal,
                         color = Color.Black,
-                        style = MaterialTheme.typography.bodySmall,
+                        style = MaterialTheme.typography.bodyMedium,
                     )
                     if (card.isMonster) {
                         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -93,13 +93,13 @@ fun Stats(card: YGOCard) {
                                 text = card.monsterAttack.toString(),
                                 fontWeight = FontWeight.Normal,
                                 color = Color.Black,
-                                style = MaterialTheme.typography.bodySmall,
+                                style = MaterialTheme.typography.bodyMedium,
                             )
                             Text(
                                 text = card.monsterDefense.toString(),
                                 fontWeight = FontWeight.Normal,
                                 color = Color.Black,
-                                style = MaterialTheme.typography.bodySmall,
+                                style = MaterialTheme.typography.bodyMedium,
                             )
                         }
                     }
