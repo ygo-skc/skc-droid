@@ -1,15 +1,15 @@
 package com.skc.app.droid.ui.misc
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.TrendingDown
 import androidx.compose.material.icons.automirrored.filled.TrendingFlat
@@ -40,56 +40,60 @@ fun Trending(
     innerPadding: PaddingValues,
 ) {
     val model: TrendingViewModel = viewModel()
-
     val isFetching by model.isFetching.collectAsState()
 
     LaunchedEffect("Trending View Model") {
         model.fetchData()
     }
 
-    Column(
+    Box(
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
             .fillMaxSize()
             .padding(innerPadding)
             .padding(horizontal = 15.dp)
-            .padding(bottom = 5.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        Text(
-            text = "Trending",
-            fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.titleLarge
-        )
-
         if (isFetching) {
             CircularProgressIndicator(
                 trackColor = MaterialTheme.colorScheme.primaryContainer,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier.align(Alignment.Center)
             )
         } else {
-            model.trendingCards.forEachIndexed { ind, trendingMetric ->
-                YGOCardListItem(card = trendingMetric.resource, onClick = {
-                    navController.navigate(
-                        Route.YGO_CARD.value.replace(
-                            "{cardID}",
-                            trendingMetric.resource.cardID
-                        )
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                item {
+                    Text(
+                        text = "Trending",
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.titleLarge
                     )
-                }) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        TrendingSummary(
-                            change = trendingMetric.change,
-                            occurrences = trendingMetric.occurrences
+                }
+
+                itemsIndexed(model.trendingCards) { ind, trendingMetric ->
+                    YGOCardListItem(card = trendingMetric.resource, onClick = {
+                        navController.navigate(
+                            Route.YGO_CARD.value.replace(
+                                "{cardID}",
+                                trendingMetric.resource.cardID
+                            )
                         )
-                        Text(
-                            text = "#${ind + 1}",
-                            style = MaterialTheme.typography.labelLarge
-                        )
+                    }) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            TrendingSummary(
+                                change = trendingMetric.change,
+                                occurrences = trendingMetric.occurrences
+                            )
+                            Text(
+                                text = "#${ind + 1}",
+                                style = MaterialTheme.typography.labelLarge
+                            )
+                        }
                     }
                 }
             }
