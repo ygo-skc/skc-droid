@@ -1,6 +1,7 @@
 package com.skc.app.droid.ui.card.ygo.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -41,7 +42,13 @@ fun Stats(card: YGOCard) {
                     size = 140.dp,
                     cardID = card.cardID,
                     imageSize = YGOImageSize.SMALL,
-                    variant = YGOCardImageVariant.ROUNDED_CORNER
+                    variant = YGOCardImageVariant.ROUNDED_CORNER,
+                    modifier = Modifier
+                        .border(
+                            width = 4.dp,
+                            color = Color.White.copy(alpha = 0.7f),
+                            shape = RoundedCornerShape(size = 140.dp / 10)
+                        ),
                 )
                 Text(
                     text = card.cardName,

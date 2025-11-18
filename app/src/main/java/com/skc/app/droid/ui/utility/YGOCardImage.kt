@@ -22,11 +22,11 @@ fun YGOCardImage(
     cardID: String,
     cardColor: String? = null,
     imageSize: YGOImageSize = YGOImageSize.SMALL,
-    variant: YGOCardImageVariant = YGOCardImageVariant.ROUND
+    variant: YGOCardImageVariant = YGOCardImageVariant.ROUND,
+    modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = Modifier
-            .size(size)
+        modifier = modifier
             .then(
                 cardColor?.let {
                     Modifier
@@ -47,10 +47,9 @@ fun YGOCardImage(
                 .size(size = size)
                 .clip(
                     shape = if (variant == YGOCardImageVariant.ROUND)
-                        RoundedCornerShape(corner = CornerSize(size / 2)) else RoundedCornerShape(
-                        corner = CornerSize(
-                            size / 10
-                        )
+                        RoundedCornerShape(corner = CornerSize(size / 2))
+                    else RoundedCornerShape(
+                        corner = CornerSize(size / 10)
                     )
                 )
         )
