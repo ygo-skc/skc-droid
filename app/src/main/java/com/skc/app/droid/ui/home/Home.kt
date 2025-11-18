@@ -49,15 +49,25 @@ fun Home(
             verticalArrangement = Arrangement.spacedBy(40.dp)
         ) {
             DBStats(stats)
-            CardOfTheDay(cotd = cardOfTheDay, onClick = {
+
+            CardOfTheDay(cotd = cardOfTheDay) {
                 navController.navigate(
                     Route.YGO_CARD.value.replace(
-                        "{cardID}",
-                        cardOfTheDay.card.cardID
+                        oldValue = "{cardID}",
+                        newValue = cardOfTheDay.card.cardID
                     )
                 )
-            })
-            UpcomingTCGProducts(upcomingYGOProducts)
+            }
+            UpcomingTCGProducts(upcomingYGOProducts) { link ->
+                if (link.startsWith(prefix = "/card")) {
+                    navController.navigate(
+                        Route.YGO_CARD.value.replace(
+                            oldValue = "{cardID}",
+                            newValue = link.replace(oldValue = "/card/", newValue = "")
+                        )
+                    )
+                }
+            }
         }
     }
 }

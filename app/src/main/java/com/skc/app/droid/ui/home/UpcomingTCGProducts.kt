@@ -17,7 +17,10 @@ import com.skc.app.droid.util.DatesUtil
 import dev.jeziellago.compose.markdowntext.MarkdownText
 
 @Composable
-fun UpcomingTCGProducts(upcomingYGOProducts: Events) {
+fun UpcomingTCGProducts(
+    upcomingYGOProducts: Events,
+    onCardLinkClick: (String) -> Unit
+) {
     Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
         Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
             Text(
@@ -39,7 +42,11 @@ fun UpcomingTCGProducts(upcomingYGOProducts: Events) {
                     )
                     Column {
                         Text(text = event.name, fontWeight = FontWeight.Bold)
-                        MarkdownText(markdown = event.notes)
+                        MarkdownText(
+                            markdown = event.notes,
+                            linkColor = MaterialTheme.colorScheme.primary,
+                            onLinkClicked = onCardLinkClick
+                        )
                         HorizontalDivider(
                             modifier = Modifier
                                 .padding(vertical = 6.dp)
