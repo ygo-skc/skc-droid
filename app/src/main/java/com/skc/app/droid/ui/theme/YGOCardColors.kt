@@ -64,3 +64,8 @@ fun String.cardColorUI(): Color {
         else -> Color.White
     }
 }
+
+@Composable
+fun onYGOCard(): Color {
+    return if (isSystemInDarkTheme()) Color(0xFFeceff1) else Color.White
+}

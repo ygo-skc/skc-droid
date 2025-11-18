@@ -14,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.MutableCreationExtras
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.skc.app.droid.ui.card.ygo.components.Stats
@@ -36,7 +37,8 @@ fun Card(cardID: String, innerPadding: PaddingValues) {
         modifier = Modifier
             .verticalScroll(rememberScrollState())
             .fillMaxSize()
-            .padding(innerPadding),
+            .padding(innerPadding)
+            .padding(horizontal = 15.dp),
     ) {
         if (isFetching) {
             CircularProgressIndicator(
