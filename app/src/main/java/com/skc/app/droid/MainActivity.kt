@@ -44,12 +44,20 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             val currentRoute =
                 navController.currentBackStackEntryAsState().value?.destination?.route
+            val isBottomBarVisible = currentRoute in listOf(
+                Route.HOME.value,
+                Route.TRENDING.value
+            )
 
             SKCTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     bottomBar = {
-                        if (currentRoute in listOf(Route.HOME.value, Route.TRENDING.value)) {
+                        AnimatedVisibility(
+                            visible = isBottomBarVisible,
+                            enter = slideInVertically(initialOffsetY = { it }),
+                            exit = slideOutVertically(targetOffsetY = { it })
+                        ) {
                             BottomNavBar(navController = navController)
                         }
                     }
