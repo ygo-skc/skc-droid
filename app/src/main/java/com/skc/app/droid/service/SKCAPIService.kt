@@ -18,5 +18,5 @@ interface SKCAPIService {
     suspend fun searchCard(
         @Query("limit") limit: Int,
         @Query("cName") cardName: String,
-    ): Response<YGOCard>
+    ): Response<List<YGOCard>>
 }
