@@ -4,6 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -55,11 +59,19 @@ class MainActivity : ComponentActivity() {
                         startDestination = Route.HOME.value,
                         modifier = Modifier.padding(innerPadding)
                     ) {
-                        composable(route = Route.HOME.value) {
+                        composable(
+                            route = Route.HOME.value,
+                            enterTransition = { fadeIn(animationSpec = tween(200)) },
+                            exitTransition = { fadeOut(animationSpec = tween(200)) },
+                        ) {
                             Home(navController = navController)
                         }
 
-                        composable(route = Route.TRENDING.value) {
+                        composable(
+                            route = Route.TRENDING.value,
+                            enterTransition = { fadeIn(animationSpec = tween(200)) },
+                            exitTransition = { fadeOut(animationSpec = tween(200)) },
+                        ) {
                             Trending(navController = navController)
                         }
 
@@ -68,6 +80,30 @@ class MainActivity : ComponentActivity() {
                             arguments = listOf(
                                 navArgument("cardID") { type = NavType.StringType }
                             ),
+                            enterTransition = {
+                                slideIntoContainer(
+                                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                                    animationSpec = tween(300)
+                                )
+                            },
+                            popEnterTransition = {
+                                slideIntoContainer(
+                                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                                    animationSpec = tween(300)
+                                )
+                            },
+                            exitTransition = {
+                                slideOutOfContainer(
+                                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                                    animationSpec = tween(300)
+                                )
+                            },
+                            popExitTransition = {
+                                slideOutOfContainer(
+                                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                                    animationSpec = tween(300)
+                                )
+                            }
                         ) { entry ->
                             Card(
                                 cardID = entry.arguments?.getString("cardID") ?: ""
