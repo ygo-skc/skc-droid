@@ -5,6 +5,7 @@ import com.skc.app.droid.model.YGOCard
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface SKCAPIService {
     @GET("/api/v1/stats")
@@ -12,4 +13,10 @@ interface SKCAPIService {
 
     @GET("/api/v1/card/{cardID}")
     suspend fun getCardInfo(@Path("cardID") cardID: String): Response<YGOCard>
+
+    @GET("/api/v1/card/search")
+    suspend fun searchCard(
+        @Query("limit") limit: Int,
+        @Query("cName") cardName: String,
+    ): Response<YGOCard>
 }
