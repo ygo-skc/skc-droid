@@ -31,11 +31,11 @@ import androidx.navigation.NavHostController
 import com.skc.app.droid.Route
 import com.skc.app.droid.ui.card.ygo.YGOCardListItem
 import com.skc.app.droid.viewmodel.TrendingViewModel
-import com.skc.app.droid.x.parent
 
 @Composable
 fun Trending(
     navController: NavHostController,
+    modifier: Modifier = Modifier
 ) {
     val model: TrendingViewModel = viewModel()
     val isFetching by model.isFetching.collectAsState()
@@ -44,7 +44,7 @@ fun Trending(
         model.fetchData()
     }
 
-    Box(modifier = Modifier.parent()) {
+    Box(modifier = modifier) {
         if (isFetching) {
             CircularProgressIndicator(
                 trackColor = MaterialTheme.colorScheme.primaryContainer,

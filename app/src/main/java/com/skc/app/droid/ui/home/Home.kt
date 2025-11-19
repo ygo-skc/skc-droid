@@ -15,12 +15,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.skc.app.droid.Route
 import com.skc.app.droid.viewmodel.HomeViewModel
-import com.skc.app.droid.x.parent
 import java.time.LocalDateTime
 
 @Composable
 fun Home(
-    navController: NavHostController
+    navController: NavHostController,
+    modifier: Modifier = Modifier
 ) {
     val model: HomeViewModel = viewModel()
     LaunchedEffect("Home View Model") {
@@ -39,8 +39,7 @@ fun Home(
         },
     ) {
         Column(
-            modifier = Modifier
-                .parent()
+            modifier = modifier
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(40.dp)
         ) {
