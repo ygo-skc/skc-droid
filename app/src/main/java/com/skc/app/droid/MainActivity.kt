@@ -57,23 +57,29 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             val currentRoute =
                 navController.currentBackStackEntryAsState().value?.destination?.route
+            var showSearch by remember { mutableStateOf(false) }
             val isBottomBarVisible = currentRoute in listOf(
                 Route.HOME.value,
                 Route.TRENDING.value
-            )
-            var showSearch by remember { mutableStateOf(false) }
+            ) && !showSearch
 
             SKCTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     floatingActionButton = {
-                        FloatingActionButton(
-                            onClick = { showSearch = true }
+                        AnimatedVisibility(
+                            visible = isBottomBarVisible,
+                            enter = slideInVertically(initialOffsetY = { it + 300 }),
+                            exit = slideOutVertically(targetOffsetY = { it + 300 })
                         ) {
-                            Icon(
-                                imageVector = Icons.Default.Search,
-                                contentDescription = "Search"
-                            )
+                            FloatingActionButton(
+                                onClick = { showSearch = true }
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Search,
+                                    contentDescription = "Search"
+                                )
+                            }
                         }
                     },
                     bottomBar = {
@@ -108,7 +114,6 @@ class MainActivity : ComponentActivity() {
                                 SearchOverlay(
                                     onDismiss = { showSearch = false },
                                     onCardSelected = { cardId ->
-                                        showSearch = false
                                         navController.navigate(
                                             Route.YGO_CARD.value.replace("{cardID}", cardId)
                                         )

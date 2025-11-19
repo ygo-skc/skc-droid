@@ -8,12 +8,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -21,32 +21,35 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.skc.app.droid.ui.card.ygo.YGOCardListItem
+import com.skc.app.droid.viewmodel.SearchViewModel
 
 @Composable
 fun SearchOverlay(
     onDismiss: () -> Unit,
     onCardSelected: (String) -> Unit
 ) {
-    var query by remember { mutableStateOf("") }
+    val model: SearchViewModel = viewModel()
+    val subject by model.subject.collectAsState()
+    val results by model.results.collectAsState()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
+            .background(MaterialTheme.colorScheme.background)
+            .padding(horizontal = 10.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 10.dp),
+                .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -62,9 +65,10 @@ fun SearchOverlay(
             }
 
             TextField(
-                value = query,
+                value = subject,
                 onValueChange = {
-                    query = it
+                    model._subject.value = it
+                    model.execute()
                 },
                 modifier = Modifier
                     .weight(1f),
@@ -78,8 +82,8 @@ fun SearchOverlay(
                     unfocusedIndicatorColor = Color.Transparent
                 ),
                 trailingIcon = {
-                    if (query.isNotEmpty()) {
-                        IconButton(onClick = { query = "" }) {
+                    if (subject.isNotEmpty()) {
+                        IconButton(onClick = { model.reset() }) {
                             Icon(
                                 imageVector = Icons.Default.Close,
                                 contentDescription = "Clear"
@@ -90,16 +94,15 @@ fun SearchOverlay(
             )
         }
 
-        HorizontalDivider(
-            thickness = 2.dp,
-            color = MaterialTheme.colorScheme.surfaceContainerHighest
-        )
-
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-
+            itemsIndexed(results) { _, card ->
+                YGOCardListItem(card = card, onClick = {
+                    onCardSelected(card.cardID)
+                })
+            }
         }
     }
 }
