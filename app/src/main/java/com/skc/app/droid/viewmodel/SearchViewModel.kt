@@ -9,14 +9,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class SearchViewModel(private val ygoRepo: YGORepository = YGORepositoryImp()) : ViewModel() {
-    val _subject = MutableStateFlow("")
+sealed class SearchViewModel(private val ygoRepo: YGORepository = YGORepositoryImp()) :
+    ViewModel() {
+    private val _subject = MutableStateFlow("")
     private val _results = MutableStateFlow(emptyList<YGOCard>())
 
     val subject get() = _subject.asStateFlow()
     val results get() = _results.asStateFlow()
 
-    fun execute() {
+    fun execute(newValue: String) {
+        _subject.value = newValue
         viewModelScope.launch {
             val res = ygoRepo.searchCard(limit = 10, cardName = subject.value)
             res.body()?.let {

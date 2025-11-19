@@ -28,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -40,6 +41,7 @@ import com.skc.app.droid.ui.misc.Trending
 import com.skc.app.droid.ui.theme.SKCTheme
 import com.skc.app.droid.ui.utility.BottomNavBar
 import com.skc.app.droid.util.SearchOverlay
+import com.skc.app.droid.viewmodel.SearchViewModel
 import com.skc.app.droid.x.parent
 
 enum class Route(val value: String, val tabImage: ImageVector) {
@@ -57,11 +59,12 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             val currentRoute =
                 navController.currentBackStackEntryAsState().value?.destination?.route
-            var showSearch by remember { mutableStateOf(false) }
+
+            var isSearchUIVisible by remember { mutableStateOf(false) }
             val isBottomBarVisible = currentRoute in listOf(
                 Route.HOME.value,
                 Route.TRENDING.value
-            ) && !showSearch
+            ) && !isSearchUIVisible
 
             SKCTheme {
                 Scaffold(
@@ -73,7 +76,7 @@ class MainActivity : ComponentActivity() {
                             exit = slideOutVertically(targetOffsetY = { it + 300 })
                         ) {
                             FloatingActionButton(
-                                onClick = { showSearch = true }
+                                onClick = { isSearchUIVisible = true }
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Search,
@@ -103,6 +106,9 @@ class MainActivity : ComponentActivity() {
                             enterTransition = { fadeIn(animationSpec = tween(200)) },
                             exitTransition = { fadeOut(animationSpec = tween(200)) },
                         ) {
+                            val searchModel: SearchViewModel =
+                                viewModel(navController.getBackStackEntry(route = Route.HOME.value))
+
                             Home(
                                 navController = navController,
                                 modifier = Modifier
@@ -110,9 +116,10 @@ class MainActivity : ComponentActivity() {
                                     .padding(bottom = 72.dp)
                             )
 
-                            if (showSearch) {
+                            if (isSearchUIVisible) {
                                 SearchOverlay(
-                                    onDismiss = { showSearch = false },
+                                    model = searchModel,
+                                    onDismiss = { isSearchUIVisible = false },
                                     onCardSelected = { cardId ->
                                         navController.navigate(
                                             Route.YGO_CARD.value.replace("{cardID}", cardId)
@@ -129,12 +136,29 @@ class MainActivity : ComponentActivity() {
                             enterTransition = { fadeIn(animationSpec = tween(200)) },
                             exitTransition = { fadeOut(animationSpec = tween(200)) },
                         ) {
+                            val searchModel: SearchViewModel =
+                                viewModel(navController.getBackStackEntry(route = Route.HOME.value))
+
                             Trending(
                                 navController = navController,
                                 modifier = Modifier
                                     .parent()
                                     .padding(bottom = 72.dp)
                             )
+
+                            if (isSearchUIVisible) {
+                                SearchOverlay(
+                                    model = searchModel,
+                                    onDismiss = { isSearchUIVisible = false },
+                                    onCardSelected = { cardId ->
+                                        navController.navigate(
+                                            Route.YGO_CARD.value.replace("{cardID}", cardId)
+                                        )
+                                    },
+                                    modifier = Modifier
+                                        .parent()
+                                )
+                            }
                         }
 
                         composable(

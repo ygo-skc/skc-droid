@@ -26,17 +26,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.skc.app.droid.ui.card.ygo.YGOCardListItem
 import com.skc.app.droid.viewmodel.SearchViewModel
 
 @Composable
 fun SearchOverlay(
+    model: SearchViewModel,
     onDismiss: () -> Unit,
     onCardSelected: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val model: SearchViewModel = viewModel()
     val subject by model.subject.collectAsState()
     val results by model.results.collectAsState()
 
@@ -65,8 +64,7 @@ fun SearchOverlay(
             TextField(
                 value = subject,
                 onValueChange = {
-                    model._subject.value = it
-                    model.execute()
+                    model.execute(newValue = it)
                 },
                 modifier = Modifier
                     .weight(1f),
