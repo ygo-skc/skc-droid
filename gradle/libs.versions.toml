@@ -13,7 +13,7 @@ coil = "2.7.0"
 retrofit = "3.0.0"
 compose-material3 = "1.5.0-alpha08"
 compose-markdown = "0.5.7"
-navigation-compose = "2.6.0"
+navigation-compose = "2.9.6"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
