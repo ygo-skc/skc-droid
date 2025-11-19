@@ -2,6 +2,7 @@ package com.skc.app.droid.ui.misc
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -54,6 +55,7 @@ fun Trending(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize(),
+                contentPadding = PaddingValues(bottom = 10.dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 item {

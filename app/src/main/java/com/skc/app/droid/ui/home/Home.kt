@@ -2,6 +2,7 @@ package com.skc.app.droid.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
@@ -40,7 +41,8 @@ fun Home(
     ) {
         Column(
             modifier = modifier
-                .verticalScroll(rememberScrollState()),
+                .verticalScroll(rememberScrollState())
+                .padding(bottom = 10.dp),
             verticalArrangement = Arrangement.spacedBy(40.dp)
         ) {
             DBStats(stats)

@@ -117,7 +117,9 @@ class MainActivity : ComponentActivity() {
                                         navController.navigate(
                                             Route.YGO_CARD.value.replace("{cardID}", cardId)
                                         )
-                                    }
+                                    },
+                                    modifier = Modifier
+                                        .parent()
                                 )
                             }
                         }

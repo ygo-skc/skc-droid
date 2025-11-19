@@ -3,10 +3,9 @@ package com.skc.app.droid.util
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,17 +33,16 @@ import com.skc.app.droid.viewmodel.SearchViewModel
 @Composable
 fun SearchOverlay(
     onDismiss: () -> Unit,
-    onCardSelected: (String) -> Unit
+    onCardSelected: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val model: SearchViewModel = viewModel()
     val subject by model.subject.collectAsState()
     val results by model.results.collectAsState()
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .padding(horizontal = 10.dp),
+        modifier = modifier
+            .background(MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Row(
@@ -95,8 +93,8 @@ fun SearchOverlay(
         }
 
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            contentPadding = PaddingValues(bottom = 20.dp),
         ) {
             itemsIndexed(results) { _, card ->
                 YGOCardListItem(card = card, onClick = {
