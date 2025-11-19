@@ -16,8 +16,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.QuestionMark
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Whatshot
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
@@ -32,6 +39,7 @@ import com.skc.app.droid.ui.home.Home
 import com.skc.app.droid.ui.misc.Trending
 import com.skc.app.droid.ui.theme.SKCTheme
 import com.skc.app.droid.ui.utility.BottomNavBar
+import com.skc.app.droid.util.SearchOverlay
 import com.skc.app.droid.x.parent
 
 enum class Route(val value: String, val tabImage: ImageVector) {
@@ -53,10 +61,21 @@ class MainActivity : ComponentActivity() {
                 Route.HOME.value,
                 Route.TRENDING.value
             )
+            var showSearch by remember { mutableStateOf(false) }
 
             SKCTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
+                    floatingActionButton = {
+                        FloatingActionButton(
+                            onClick = { showSearch = true }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = "Search"
+                            )
+                        }
+                    },
                     bottomBar = {
                         AnimatedVisibility(
                             visible = isBottomBarVisible,
@@ -84,6 +103,18 @@ class MainActivity : ComponentActivity() {
                                     .parent()
                                     .padding(bottom = 72.dp)
                             )
+
+                            if (showSearch) {
+                                SearchOverlay(
+                                    onDismiss = { showSearch = false },
+                                    onCardSelected = { cardId ->
+                                        showSearch = false
+                                        navController.navigate(
+                                            Route.YGO_CARD.value.replace("{cardID}", cardId)
+                                        )
+                                    }
+                                )
+                            }
                         }
 
                         composable(
