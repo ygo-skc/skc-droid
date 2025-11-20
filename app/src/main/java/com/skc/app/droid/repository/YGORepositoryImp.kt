@@ -12,7 +12,7 @@ import retrofit2.Response
 
 interface SKCRepository {
     suspend fun getDBStats(): Response<DBStats>
-    suspend fun getCardInfo(cardID: String): Response<YGOCard>
+    suspend fun getCardInfo(cardID: String, allInfo: Boolean): Response<YGOCard>
     suspend fun searchCard(limit: Int, cardName: String): Response<List<YGOCard>>
 }
 
@@ -29,8 +29,8 @@ class YGORepositoryImp(
 ) : YGORepository {
     override suspend fun getDBStats(): Response<DBStats> = skcAPIClient.getDBStats()
 
-    override suspend fun getCardInfo(cardID: String): Response<YGOCard> =
-        skcAPIClient.getCardInfo(cardID)
+    override suspend fun getCardInfo(cardID: String, allInfo: Boolean): Response<YGOCard> =
+        skcAPIClient.getCardInfo(cardID, allInfo)
 
     override suspend fun searchCard(
         limit: Int,

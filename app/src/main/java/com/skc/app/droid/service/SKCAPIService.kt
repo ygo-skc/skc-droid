@@ -12,7 +12,10 @@ interface SKCAPIService {
     suspend fun getDBStats(): Response<DBStats>
 
     @GET("/api/v1/card/{cardID}")
-    suspend fun getCardInfo(@Path("cardID") cardID: String): Response<YGOCard>
+    suspend fun getCardInfo(
+        @Path("cardID") cardID: String,
+        @Query("allInfo") allInfo: Boolean
+    ): Response<YGOCard>
 
     @GET("/api/v1/card/search")
     suspend fun searchCard(

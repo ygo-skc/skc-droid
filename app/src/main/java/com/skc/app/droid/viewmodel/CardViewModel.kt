@@ -26,9 +26,9 @@ class CardViewModel(
 
     fun fetchData() {
         viewModelScope.launch {
-            val res = ygoRepo.getCardInfo(cardID)
+            val res = ygoRepo.getCardInfo(cardID, allInfo = true)
             res.body()?.let {
-                Log.i("Javi", it.toString())
+                Log.i("Card", it.toString())
                 card = it
                 _isFetching.value = false
             }
