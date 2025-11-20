@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -90,14 +92,27 @@ fun SearchOverlay(
             )
         }
 
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            contentPadding = PaddingValues(bottom = 20.dp),
-        ) {
-            itemsIndexed(results) { _, card ->
-                YGOCardListItem(card = card, onClick = {
-                    onCardSelected(card.cardID)
-                })
+        if (results.isEmpty()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .imePadding(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = if (subject.isEmpty()) "Type to search \uD83D\uDE09" else "No results")
+            }
+        } else {
+            LazyColumn(
+                modifier = Modifier.imePadding(),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                contentPadding = PaddingValues(bottom = 20.dp),
+            ) {
+                itemsIndexed(results) { _, card ->
+                    YGOCardListItem(card = card, onClick = {
+                        onCardSelected(card.cardID)
+                    })
+                }
             }
         }
     }
