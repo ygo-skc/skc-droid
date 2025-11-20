@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class TrendingViewModel(
+sealed class TrendingViewModel(
     private val ygoRepo: YGORepository = YGORepositoryImp(),
 ) : ViewModel() {
     private val _isFetching = MutableStateFlow(true)

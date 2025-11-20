@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
-class HomeViewModel(
+sealed class HomeViewModel(
     private val ygoRepo: YGORepository = YGORepositoryImp(),
     private val nextRepo: NextRepository = NextRepositoryImp(),
 ) : ViewModel() {
