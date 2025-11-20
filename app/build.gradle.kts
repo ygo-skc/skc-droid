@@ -4,7 +4,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    apply { id("kotlin-parcelize") }
+    id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -62,7 +63,11 @@ dependencies {
     implementation(libs.coil.compose)
 
     implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.gson)
+    implementation(libs.retrofit.converter.moshni)
+
+    ksp(libs.moshi.kotlin.codegen)
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
 
     implementation(libs.compose.markdown)
 

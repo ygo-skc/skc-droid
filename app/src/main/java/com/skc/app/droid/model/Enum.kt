@@ -5,8 +5,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.google.gson.annotations.SerializedName
 import com.skc.app.droid.R
+import com.squareup.moshi.Json
 
 enum class YGOCardImageVariant() {
     ROUND,
@@ -14,34 +14,34 @@ enum class YGOCardImageVariant() {
 }
 
 enum class YGOAttribute(val value: String, val drawable: Int) {
-    @SerializedName("Dark")
+    @Json(name = "Dark")
     DARK(value = "Dark", drawable = R.drawable.dark_attribute),
 
-    @SerializedName("Light")
+    @Json(name = "Light")
     LIGHT(value = "Light", drawable = R.drawable.light_attribute),
 
-    @SerializedName("Wind")
+    @Json(name = "Wind")
     WIND(value = "Wind", drawable = R.drawable.wind_attribute),
 
-    @SerializedName("Earth")
+    @Json(name = "Earth")
     EARTH(value = "Earth", drawable = R.drawable.earth_attribute),
 
-    @SerializedName("Water")
+    @Json(name = "Water")
     WATER(value = "Water", drawable = R.drawable.water_attribute),
 
-    @SerializedName("Fire")
+    @Json(name = "Fire")
     FIRE(value = "Fire", drawable = R.drawable.fire_attribute),
 
-    @SerializedName("Divine")
+    @Json(name = "Divine")
     DIVINE(value = "Divine", drawable = R.drawable.divine_attribute),
 
-    @SerializedName("Spell")
+    @Json(name = "Spell")
     SPELL(value = "Spell", drawable = R.drawable.spell_attribute),
 
-    @SerializedName("Trap")
+    @Json(name = "Trap")
     TRAP(value = "Trap", drawable = R.drawable.trap_attribute),
 
-    @SerializedName("Unknown")
+    @Json(name = "Unknown")
     UNKNOWN(value = "Unknown", drawable = 0),
 }
 
