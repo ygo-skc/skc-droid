@@ -55,7 +55,6 @@ fun SearchOverlay(
             FloatingActionButton(
                 onClick = onDismiss,
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.primary
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,

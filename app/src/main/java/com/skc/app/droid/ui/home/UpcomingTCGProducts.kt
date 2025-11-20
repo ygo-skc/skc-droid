@@ -44,7 +44,7 @@ fun UpcomingTCGProducts(
                         Text(text = event.name, fontWeight = FontWeight.Bold)
                         MarkdownText(
                             markdown = event.notes,
-                            linkColor = MaterialTheme.colorScheme.primary,
+                            linkColor = MaterialTheme.colorScheme.secondary,
                             onLinkClicked = onCardLinkClick
                         )
                         HorizontalDivider(
