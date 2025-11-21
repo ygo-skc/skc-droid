@@ -1,6 +1,5 @@
 package com.skc.app.droid.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -28,7 +27,6 @@ class CardViewModel(
         viewModelScope.launch {
             val res = ygoRepo.getCardInfo(cardID, allInfo = true)
             res.body()?.let {
-                Log.i("Card", it.toString())
                 card = it
                 _isFetching.value = false
             }

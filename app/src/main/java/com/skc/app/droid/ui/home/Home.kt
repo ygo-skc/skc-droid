@@ -10,17 +10,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
-import com.skc.app.droid.Route
+import com.skc.app.droid.YGOCardKey
 import com.skc.app.droid.viewmodel.HomeViewModel
 import java.time.LocalDateTime
 
 @Composable
 fun Home(
-    navController: NavHostController,
+    backStack: SnapshotStateList<Any>,
     modifier: Modifier = Modifier
 ) {
     val model: HomeViewModel = viewModel()
@@ -48,20 +48,12 @@ fun Home(
             DBStats(stats)
 
             CardOfTheDay(cotd = cardOfTheDay) {
-                navController.navigate(
-                    Route.YGO_CARD.value.replace(
-                        oldValue = "{cardID}",
-                        newValue = cardOfTheDay.card.cardID
-                    )
-                )
+                backStack.add(YGOCardKey(cardOfTheDay.card.cardID))
             }
             UpcomingTCGProducts(upcomingYGOProducts) { link ->
                 if (link.startsWith(prefix = "/card")) {
-                    navController.navigate(
-                        Route.YGO_CARD.value.replace(
-                            oldValue = "{cardID}",
-                            newValue = link.replace(oldValue = "/card/", newValue = "")
-                        )
+                    backStack.add(
+                        YGOCardKey(cardID = link.replace(oldValue = "/card/", newValue = ""))
                     )
                 }
             }

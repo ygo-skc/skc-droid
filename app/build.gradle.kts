@@ -58,7 +58,6 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons.extended)
-    implementation(libs.navigation.compose)
 
     implementation(libs.coil.compose)
 
@@ -68,6 +67,11 @@ dependencies {
     ksp(libs.moshi.kotlin.codegen)
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
+
+
+    implementation(libs.nav3.ui)
+    implementation(libs.nav3.runtime)
+    implementation(libs.viewmodel.nav3)
 
     implementation(libs.compose.markdown)
 

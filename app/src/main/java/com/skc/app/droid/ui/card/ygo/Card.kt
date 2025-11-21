@@ -23,7 +23,9 @@ fun Card(cardID: String) {
         factory = CardViewModel.Factory,
         extras = MutableCreationExtras().apply {
             set(CardViewModel.KEY, cardID)
-        })
+        },
+        key = cardID
+    )
     val isFetching by model.isFetching.collectAsState()
 
     LaunchedEffect("Card Model") {

@@ -22,20 +22,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
-import com.skc.app.droid.Route
+import com.skc.app.droid.YGOCardKey
 import com.skc.app.droid.ui.card.ygo.YGOCardListItem
 import com.skc.app.droid.viewmodel.TrendingViewModel
 
 @Composable
 fun Trending(
-    navController: NavHostController,
+    backStack: SnapshotStateList<Any>,
     modifier: Modifier = Modifier
 ) {
     val model: TrendingViewModel = viewModel()
@@ -68,12 +68,7 @@ fun Trending(
 
                 itemsIndexed(model.trendingCards) { ind, trendingMetric ->
                     YGOCardListItem(card = trendingMetric.resource, onClick = {
-                        navController.navigate(
-                            Route.YGO_CARD.value.replace(
-                                "{cardID}",
-                                trendingMetric.resource.cardID
-                            )
-                        )
+                        backStack.add(YGOCardKey(trendingMetric.resource.cardID))
                     }) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
