@@ -73,7 +73,7 @@ fun Card(cardID: String) {
                         YGOCardImage(
                             size = 140.dp,
                             cardID = model.card.cardID,
-                            imageSize = YGOImageSize.SMALL,
+                            imageSize = YGOImageSize.X_SMALL,
                             variant = YGOCardImageVariant.ROUNDED_CORNER,
                             modifier = Modifier
                                 .border(
@@ -84,7 +84,7 @@ fun Card(cardID: String) {
                         )
                         Column(
                             modifier = Modifier.fillMaxWidth(),
-                            verticalArrangement = Arrangement.spacedBy(10.dp)
+                            verticalArrangement = Arrangement.spacedBy(6.dp)
                         ) {
                             MonsterAssociation(
                                 monsterAssociation = model.card.monsterAssociation,
