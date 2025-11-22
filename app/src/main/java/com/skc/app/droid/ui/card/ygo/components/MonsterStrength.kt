@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MonsterStrength(monsterAttack: Int?, monsterDefense: Int?) {
+fun MonsterStrength(monsterAttack: String, monsterDefense: String) {
     Row(
         modifier = Modifier
             .clip(shape = RoundedCornerShape(size = 6.dp))
@@ -26,14 +26,14 @@ fun MonsterStrength(monsterAttack: Int?, monsterDefense: Int?) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = monsterAttack.toString(),
+            text = monsterAttack,
             fontWeight = FontWeight.Normal,
             color = Color(0xFFff1744),
             style = MaterialTheme.typography.bodyMedium,
         )
 
         Text(
-            text = monsterDefense.toString(),
+            text = monsterDefense,
             fontWeight = FontWeight.Normal,
             color = Color(0xFF2979ff),
             style = MaterialTheme.typography.bodyMedium,

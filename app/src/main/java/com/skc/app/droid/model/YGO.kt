@@ -25,6 +25,16 @@ data class YGOCard(
         get() = !(cardColor.equals("spell", ignoreCase = true)
                 || cardColor.equals("spell", ignoreCase = true))
 
+    val atk: String
+        get() = monsterAttack?.toString() ?: run { "?" }
+
+    val def: String
+        get() = if (cardColor.equals(
+                "link",
+                ignoreCase = true
+            )
+        ) "—" else monsterDefense?.toString() ?: run { "?" }
+
     companion object {
         val placeholder = YGOCard(
             cardID = "XXXXXXXX",

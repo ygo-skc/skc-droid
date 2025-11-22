@@ -55,8 +55,8 @@ fun Stats(card: YGOCard) {
             )
             if (card.isMonster) {
                 MonsterStrength(
-                    monsterAttack = card.monsterAttack,
-                    monsterDefense = card.monsterDefense
+                    monsterAttack = card.atk,
+                    monsterDefense = card.def,
                 )
             }
         }
