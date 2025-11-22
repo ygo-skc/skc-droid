@@ -25,6 +25,9 @@ data class YGOCard(
         get() = !(cardColor.equals("spell", ignoreCase = true)
                 || cardColor.equals("spell", ignoreCase = true))
 
+    val isPendulum: Boolean
+        get() = isPendulum(cardColor)
+
     val atk: String
         get() = monsterAttack?.toString() ?: run { "?" }
 
@@ -45,6 +48,8 @@ data class YGOCard(
             monsterAttack = 9999,
             monsterDefense = 9999
         )
+
+        fun isPendulum(cardColor: String) = cardColor.contains("pendulum", ignoreCase = true)
     }
 
     @Parcelize

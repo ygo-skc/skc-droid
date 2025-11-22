@@ -12,9 +12,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.skc.app.droid.model.YGOCard
 import com.skc.app.droid.model.YGOCardImageVariant
 import com.skc.app.droid.model.YGOImageSize
 import com.skc.app.droid.ui.theme.cardColorUI
+import com.skc.app.droid.ui.theme.cardGradientUI
 
 @Composable
 fun YGOCardImage(
@@ -27,18 +29,20 @@ fun YGOCardImage(
 ) {
     Box(
         modifier = modifier
-            .then(
+            .let { m ->
                 cardColor?.let {
-                    Modifier
-                        .border(
-                            width = 4.dp,
-                            color = cardColor.cardColorUI(),
-                            shape = CircleShape
-                        )
-                } ?: run {
-                    Modifier
-                }
-            )
+                    if (YGOCard.isPendulum(cardColor)) m.border(
+                        width = 4.dp,
+                        brush = cardColor.cardGradientUI(),
+                        shape = CircleShape
+                    )
+                    else m.border(
+                        width = 4.dp,
+                        color = cardColor.cardColorUI(),
+                        shape = CircleShape
+                    )
+                } ?: m
+            }
     ) {
         AsyncImage(
             model = "https://images.thesupremekingscastle.com/cards/${imageSize.value}/$cardID.jpg",

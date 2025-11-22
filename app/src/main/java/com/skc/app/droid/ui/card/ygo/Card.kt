@@ -30,6 +30,7 @@ import com.skc.app.droid.model.YGOImageSize
 import com.skc.app.droid.ui.card.ygo.components.MonsterAssociation
 import com.skc.app.droid.ui.card.ygo.components.Stats
 import com.skc.app.droid.ui.theme.cardColorUI
+import com.skc.app.droid.ui.theme.cardGradientUI
 import com.skc.app.droid.ui.theme.onYGOCard
 import com.skc.app.droid.ui.utility.YGOCardImage
 import com.skc.app.droid.viewmodel.CardViewModel
@@ -65,7 +66,10 @@ fun Card(cardID: String) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(color = model.card.cardColor.cardColorUI())
+                        .let {
+                            if (model.card.isPendulum) it.background(brush = model.card.cardColor.cardGradientUI())
+                            else it.background(color = model.card.cardColor.cardColorUI())
+                        }
                         .padding(all = 8.dp),
                     verticalArrangement = Arrangement.spacedBy(15.dp)
                 ) {

@@ -2,6 +2,7 @@ package com.skc.app.droid.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 @Composable
@@ -64,6 +65,53 @@ fun String.cardColorUI(): Color {
         else -> Color.White
     }
 }
+
+@Composable
+fun String.cardGradientUI(): Brush = when (this) {
+    "Pendulum-Normal" -> Brush.verticalGradient(
+        colorStops = pendulumColorStops(monsterColor = normal()),
+        startY = 0.0f,
+        endY = Float.POSITIVE_INFINITY
+    )
+
+    "Pendulum-Effect" -> Brush.verticalGradient(
+        colorStops = pendulumColorStops(monsterColor = effect()),
+        startY = 0.0f,
+        endY = Float.POSITIVE_INFINITY
+    )
+
+    "Pendulum-Ritual" -> Brush.verticalGradient(
+        colorStops = pendulumColorStops(monsterColor = ritual()),
+        startY = 0.0f,
+        endY = Float.POSITIVE_INFINITY
+    )
+
+    "Pendulum-Fusion" -> Brush.verticalGradient(
+        colorStops = pendulumColorStops(monsterColor = fusion()),
+        startY = 0.0f,
+        endY = Float.POSITIVE_INFINITY
+    )
+
+    "Pendulum-Xyz" -> Brush.verticalGradient(
+        colorStops = pendulumColorStops(monsterColor = xyz()),
+        startY = 0.0f,
+        endY = Float.POSITIVE_INFINITY
+    )
+
+    else -> Brush.verticalGradient(
+        colors = listOf(Color.White),
+        startY = 0.0f,
+        endY = 100.0f
+    )
+}
+
+@Composable
+private fun pendulumColorStops(monsterColor: Color) = arrayOf(
+    0.0f to monsterColor,
+    0.45f to monsterColor,
+    0.55f to spell(),
+    1.0f to spell()
+)
 
 @Composable
 fun onYGOCard(): Color {
