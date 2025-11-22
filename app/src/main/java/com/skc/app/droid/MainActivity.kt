@@ -57,11 +57,12 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
+            val backStack = remember { mutableStateListOf<Any>(HomeKey) }
             var isSearchUIVisible by remember { mutableStateOf(false) }
-            val isBottomBarVisible = !isSearchUIVisible
+            val isBottomBarVisible =
+                !isSearchUIVisible && listOf(HomeKey, TrendingKey).contains(backStack.last())
 
             SKCTheme {
-                val backStack = remember { mutableStateListOf<Any>(HomeKey) }
 
                 Scaffold(
                     modifier = Modifier
