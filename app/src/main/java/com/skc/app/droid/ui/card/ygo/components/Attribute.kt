@@ -11,15 +11,15 @@ import com.skc.app.droid.model.IconModifier
 import com.skc.app.droid.model.YGOAttribute
 
 @Composable
-fun Attribute(attribute: YGOAttribute) {
+fun Attribute(attribute: YGOAttribute, iconModifier: IconModifier = IconModifier.REGULAR) {
     if (attribute == YGOAttribute.UNKNOWN) {
         Icon(Icons.Default.QuestionMark, "Unknown")
     } else {
         Image(
             painterResource(id = attribute.drawable),
-            contentDescription = "",
+            contentDescription = attribute.value,
             contentScale = ContentScale.Fit,
-            modifier = IconModifier.REGULAR.modifier,
+            modifier = iconModifier.modifier,
         )
     }
 }

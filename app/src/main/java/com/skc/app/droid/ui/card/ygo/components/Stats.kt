@@ -1,17 +1,16 @@
 package com.skc.app.droid.ui.card.ygo.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -20,90 +19,45 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.skc.app.droid.model.YGOAttribute
 import com.skc.app.droid.model.YGOCard
-import com.skc.app.droid.model.YGOCardImageVariant
-import com.skc.app.droid.model.YGOImageSize
 import com.skc.app.droid.ui.theme.SKCTheme
-import com.skc.app.droid.ui.theme.cardColorUI
-import com.skc.app.droid.ui.theme.onYGOCard
-import com.skc.app.droid.ui.utility.YGOCardImage
 
 @Composable
 fun Stats(card: YGOCard) {
-    ElevatedCard {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(card.cardColor.cardColorUI())
-                .padding(all = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(15.dp)
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(shape = RoundedCornerShape(size = 6.dp))
+            .background(Color.White.copy(alpha = 0.7f))
+            .padding(6.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        Text(
+            text = card.cardColor,
+            fontWeight = FontWeight.SemiBold,
+            color = Color.Black,
+        )
+        Text(
+            text = card.cardEffect,
+            modifier = Modifier.padding(bottom = 5.dp),
+            color = Color.Black,
+            style = MaterialTheme.typography.bodyMedium,
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(horizontalArrangement = Arrangement.spacedBy(15.dp)) {
-                YGOCardImage(
-                    size = 140.dp,
-                    cardID = card.cardID,
-                    imageSize = YGOImageSize.SMALL,
-                    variant = YGOCardImageVariant.ROUNDED_CORNER,
-                    modifier = Modifier
-                        .border(
-                            width = 4.dp,
-                            color = Color.White.copy(alpha = 0.7f),
-                            shape = RoundedCornerShape(size = 140.dp / 10)
-                        ),
+            Text(
+                text = card.cardID,
+                fontWeight = FontWeight.Normal,
+                color = Color.Black,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            if (card.isMonster) {
+                MonsterStrength(
+                    monsterAttack = card.monsterAttack,
+                    monsterDefense = card.monsterDefense
                 )
-                Text(
-                    text = card.cardName,
-                    modifier = Modifier.fillMaxWidth(),
-                    fontWeight = FontWeight.SemiBold,
-                    color = onYGOCard(),
-                    style = MaterialTheme.typography.titleLarge,
-                )
-            }
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(shape = RoundedCornerShape(size = 6.dp))
-                    .background(Color.White.copy(alpha = 0.7f))
-                    .padding(6.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                Text(
-                    text = card.cardColor,
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color.Black,
-                )
-                Text(
-                    text = card.cardEffect,
-                    modifier = Modifier.padding(bottom = 5.dp),
-                    color = Color.Black,
-                    style = MaterialTheme.typography.bodyMedium,
-                )
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = card.cardID,
-                        fontWeight = FontWeight.Normal,
-                        color = Color.Black,
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-                    if (card.isMonster) {
-                        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                            Text(
-                                text = card.monsterAttack.toString(),
-                                fontWeight = FontWeight.Normal,
-                                color = Color.Black,
-                                style = MaterialTheme.typography.bodyMedium,
-                            )
-                            Text(
-                                text = card.monsterDefense.toString(),
-                                fontWeight = FontWeight.Normal,
-                                color = Color.Black,
-                                style = MaterialTheme.typography.bodyMedium,
-                            )
-                        }
-                    }
-                }
             }
         }
     }

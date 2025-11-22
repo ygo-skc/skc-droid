@@ -61,11 +61,19 @@ enum class TaskStatus() {
 }
 
 enum class IconModifier(val modifier: Modifier) {
-    SMALL(modifier = Modifier.size(16.dp)),
+    SMALL(
+        modifier = Modifier
+            .size(16.dp)
+            .clip(CircleShape)
+    ),
     REGULAR(
         modifier = Modifier
             .size(23.dp)
             .clip(CircleShape)
     ),
-    LARGE(modifier = Modifier.size(30.dp)),
+    LARGE(
+        modifier = Modifier
+            .size(30.dp)
+            .clip(CircleShape)
+    ),
 }
