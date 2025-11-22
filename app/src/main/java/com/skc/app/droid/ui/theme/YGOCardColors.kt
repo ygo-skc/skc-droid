@@ -25,8 +25,8 @@ private fun fusion(): Color {
 }
 
 @Composable
-private fun syncrho(): Color {
-    return if (isSystemInDarkTheme()) Color(0xFF9e9e9e) else Color(0xFFe0e0e0)
+private fun synchro(): Color {
+    return if (isSystemInDarkTheme()) Color(0xFF757575) else Color(0xFFbdbdbd)
 }
 
 @Composable
@@ -56,7 +56,7 @@ fun String.cardColorUI(): Color {
         "Effect" -> effect()
         "Ritual" -> ritual()
         "Fusion" -> fusion()
-        "Synchro" -> syncrho()
+        "Synchro" -> synchro()
         "Xyz" -> xyz()
         "Link" -> link()
         "Spell" -> spell()

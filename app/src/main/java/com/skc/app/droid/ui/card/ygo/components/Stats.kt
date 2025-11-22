@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,19 +26,17 @@ fun Stats(card: YGOCard) {
         modifier = Modifier
             .fillMaxWidth()
             .clip(shape = RoundedCornerShape(size = 6.dp))
-            .background(Color.White.copy(alpha = 0.7f))
+            .background(MaterialTheme.colorScheme.background.copy(0.7f))
             .padding(6.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         Text(
             text = card.cardColor,
             fontWeight = FontWeight.SemiBold,
-            color = Color.Black,
         )
         Text(
             text = card.cardEffect,
             modifier = Modifier.padding(bottom = 5.dp),
-            color = Color.Black,
             style = MaterialTheme.typography.bodyMedium,
         )
         Row(
@@ -50,7 +47,6 @@ fun Stats(card: YGOCard) {
             Text(
                 text = card.cardID,
                 fontWeight = FontWeight.Normal,
-                color = Color.Black,
                 style = MaterialTheme.typography.bodyMedium,
             )
             if (card.isMonster) {

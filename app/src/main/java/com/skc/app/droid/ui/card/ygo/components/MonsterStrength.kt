@@ -27,14 +27,14 @@ fun MonsterStrength(monsterAttack: String, monsterDefense: String) {
     ) {
         Text(
             text = monsterAttack,
-            fontWeight = FontWeight.Normal,
+            fontWeight = FontWeight.Medium,
             color = Color(0xFFff1744),
             style = MaterialTheme.typography.bodyMedium,
         )
 
         Text(
             text = monsterDefense,
-            fontWeight = FontWeight.Normal,
+            fontWeight = FontWeight.Medium,
             color = Color(0xFF2979ff),
             style = MaterialTheme.typography.bodyMedium,
         )
