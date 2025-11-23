@@ -13,17 +13,17 @@ data class YGOCard(
     val cardEffect: String,
     val monsterType: String? = null,
     val monsterAssociation: MonsterAssociation? = null,
-    val monsterAttack: Int? = null,
-    val monsterDefense: Int? = null,
-    val restrictedIn: AdvancedFormatRestrictions? = null,
-    val foundIn: List<ProductItem>? = null,
+    private val monsterAttack: Int? = null,
+    private val monsterDefense: Int? = null,
+    private val restrictedIn: AdvancedFormatRestrictions? = null,
+    private val foundIn: List<ProductItem>? = null,
 ) : Parcelable {
     val attribute: YGOAttribute
         get() = cardAttribute ?: YGOAttribute.UNKNOWN
 
     val isMonster: Boolean
         get() = !(cardColor.equals("spell", ignoreCase = true)
-                || cardColor.equals("spell", ignoreCase = true))
+                || cardColor.equals("trap", ignoreCase = true))
 
     val isPendulum: Boolean
         get() = isPendulum(cardColor)
@@ -37,6 +37,12 @@ data class YGOCard(
                 ignoreCase = true
             )
         ) "—" else monsterDefense?.toString() ?: run { "?" }
+
+    val advancedFormatRestriction: AdvancedFormatRestrictions
+        get() = restrictedIn ?: AdvancedFormatRestrictions(tcg = emptyList(), md = emptyList())
+
+    val productItems: List<ProductItem>
+        get() = foundIn ?: emptyList()
 
     companion object {
         val placeholder = YGOCard(
