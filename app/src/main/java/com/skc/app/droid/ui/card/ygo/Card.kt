@@ -21,7 +21,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.MutableCreationExtras
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -55,6 +54,7 @@ fun Card(cardID: String) {
         modifier = Modifier
             .parent()
             .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(40.dp)
     ) {
         if (isFetching) {
             CircularProgressIndicator(
@@ -97,7 +97,6 @@ fun Card(cardID: String) {
 
                             Text(
                                 text = model.card.cardName,
-                                fontWeight = FontWeight.SemiBold,
                                 color = onYGOCard(),
                                 style = MaterialTheme.typography.titleLarge,
                                 minLines = 2,
@@ -108,6 +107,8 @@ fun Card(cardID: String) {
                     Stats(card = model.card)
                 }
             }
+
+            CardProductInfo(products = model.card.productItems, cardName = model.card.cardName)
         }
     }
 }
