@@ -25,7 +25,6 @@ fun UpcomingTCGProducts(
         Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
             Text(
                 text = "Upcoming products",
-                fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.titleLarge
             )
             Text(

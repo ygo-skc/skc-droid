@@ -26,7 +26,6 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.skc.app.droid.YGOCardKey
@@ -61,7 +60,6 @@ fun Trending(
                 item {
                     Text(
                         text = "Trending",
-                        fontWeight = FontWeight.Bold,
                         style = MaterialTheme.typography.titleLarge
                     )
                 }
