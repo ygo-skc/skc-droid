@@ -28,6 +28,7 @@ fun CardProductInfo(products: List<ProductItem>, cardName: String) {
         .flatMap { it.rarities }
         .groupingBy { it }
         .eachCount()
+        .toSortedMap()
 
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -69,7 +70,7 @@ private fun Rarities(rarityCount: Map<String, Int>, cardName: String) {
                     Text(
                         text = it.value.toString(),
                         style = MaterialTheme.typography.labelMedium,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.ExtraBold
                     )
                     Text(
                         text = it.key,
