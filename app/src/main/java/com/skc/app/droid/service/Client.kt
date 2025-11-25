@@ -26,7 +26,7 @@ private val httpClient = OkHttpClient.Builder().addInterceptor { chain ->
     .connectTimeout(1, TimeUnit.SECONDS)
     .readTimeout(3, TimeUnit.SECONDS)
     .connectionPool(
-        ConnectionPool(8, 5, TimeUnit.MINUTES)
+        ConnectionPool(4, 5, TimeUnit.MINUTES)
     )
     .protocols(listOf(Protocol.HTTP_2, Protocol.HTTP_1_1))
     .build()
