@@ -46,7 +46,7 @@ fun CardProductInfo(products: List<ProductItem>, cardName: String) {
         .toSortedMap()
 
     Column(
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(text = "Releases", style = MaterialTheme.typography.titleLarge)
         Rarities(rarityDistribution, cardName)
@@ -174,7 +174,7 @@ private fun DataPointCard(
 ) {
     OutlinedCard(
         modifier = Modifier
-            .width(width = 180.dp)
+            .width(width = 160.dp)
     ) {
         Column(
             Modifier
@@ -200,7 +200,7 @@ private fun DataPointCard(
             }
             Text(
                 text = subHeader,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleSmall
             )
         }
     }
