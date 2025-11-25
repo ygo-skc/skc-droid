@@ -8,8 +8,8 @@ val PrimaryLight = Color(0xFF673ab7)
 val SecondaryLight = Color(0xFFff9100)
 val TertiaryLight = Color(0xFFb388ff)
 
-val PrimaryDark = Color(0xFF9c27b0)
-val SecondaryDark = Color(0xFFffc400)
+val PrimaryDark = Color(0xFFce93d8)
+val SecondaryDark = Color(0xFFff8a65)
 val TertiaryDark = Color(0xFFE5B6FF)
 
 @Composable

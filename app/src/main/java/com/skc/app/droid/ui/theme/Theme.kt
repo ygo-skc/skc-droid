@@ -12,24 +12,24 @@ import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
     primary = PrimaryDark,
-    primaryContainer = Color(0xFF7b1fa2),
+    primaryContainer = Color(0xFF4a148c),
     onPrimary = Color(0xFFeceff1),
 
     secondary = SecondaryDark,
-    secondaryContainer = Color(0xFFff8f00),
+    secondaryContainer = Color(0xFFbf360c),
     onSecondaryContainer = Color(0xFFeceff1),
 
     tertiary = TertiaryDark,
 
     background = Color(0xFF263238),
-    surface = Color(0xFF29333A),
+    surface = Color(0xFF2d3940),
     onBackground = Color(0xFFeceff1),
 
-    surfaceContainer = Color(0xFF2D3840),
-    surfaceContainerLowest = Color(0xFF323D46),
-    surfaceContainerLow = Color(0xFF36424C),
-    surfaceContainerHigh = Color(0xF3B4752),
-    surfaceContainerHighest = Color(0xFF3F4C58),
+    surfaceContainerLowest = Color(0xFF1e272b),
+    surfaceContainerLow = Color(0xFF2b373e),
+    surfaceContainer = Color(0xFF33404a),
+    surfaceContainerHigh = Color(0xFF3d4a54),
+    surfaceContainerHighest = Color(0xFF47545f),
     onSurface = Color(0xFFeceff1),
 )
 
