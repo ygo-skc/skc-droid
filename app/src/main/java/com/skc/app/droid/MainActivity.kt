@@ -3,7 +3,6 @@ package com.skc.app.droid
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.core.tween
@@ -21,6 +20,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -47,31 +47,44 @@ data object TrendingKey : NavKey
 data class YGOCardKey(val cardID: String) : NavKey
 
 enum class Route(val value: NavKey, val tabImage: ImageVector) {
-    HOME(HomeKey, Icons.Default.Home),
-    TRENDING(TrendingKey, Icons.Filled.Whatshot),
+    HOME(value = HomeKey, tabImage = Icons.Default.Home),
+    TRENDING(value = TrendingKey, tabImage = Icons.Filled.Whatshot),
 }
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        enableEdgeToEdge()
         setContent {
-            val backStack = remember { mutableStateListOf<Any>(HomeKey) }
             var isSearchUIVisible by remember { mutableStateOf(false) }
+
+            val backStack = remember { mutableStateListOf<Any>(HomeKey) }
             val isBottomBarVisible =
                 !isSearchUIVisible && listOf(HomeKey, TrendingKey).contains(backStack.last())
 
-            SKCTheme {
+            val search: @Composable () -> Unit = {
+                val searchModel: SearchViewModel = viewModel()
 
+                SearchOverlay(
+                    model = searchModel,
+                    onDismiss = { isSearchUIVisible = false },
+                    onCardSelected = { cardID ->
+                        backStack.add(YGOCardKey(cardID))
+                    },
+                    modifier = Modifier
+                        .parent()
+                )
+            }
+
+            SKCTheme {
                 Scaffold(
                     modifier = Modifier
                         .fillMaxSize(),
                     floatingActionButton = {
                         AnimatedVisibility(
                             visible = isBottomBarVisible,
-                            enter = slideInVertically(initialOffsetY = { it + 300 }),
-                            exit = slideOutVertically(targetOffsetY = { it + 300 })
+                            enter = slideInVertically(initialOffsetY = { it + 250 }),
+                            exit = slideOutVertically(targetOffsetY = { it + 250 })
                         ) {
                             FloatingActionButton(
                                 onClick = { isSearchUIVisible = true }
@@ -123,48 +136,28 @@ class MainActivity : ComponentActivity() {
                         entryProvider = { key ->
                             when (key) {
                                 is HomeKey -> NavEntry(key) {
-                                    val searchModel: SearchViewModel = viewModel()
-
-                                    Home(
-                                        backStack = backStack,
-                                        modifier = Modifier
-                                            .parent()
-                                            .padding(bottom = 72.dp)
-                                    )
-
-                                    if (isSearchUIVisible) {
-                                        SearchOverlay(
-                                            model = searchModel,
-                                            onDismiss = { isSearchUIVisible = false },
-                                            onCardSelected = { cardID ->
-                                                backStack.add(YGOCardKey(cardID))
-                                            },
+                                    if (!isSearchUIVisible) {
+                                        Home(
+                                            backStack = backStack,
                                             modifier = Modifier
                                                 .parent()
+                                                .padding(bottom = 72.dp)
                                         )
+                                    } else {
+                                        search()
                                     }
                                 }
 
                                 is TrendingKey -> NavEntry(key) {
-                                    val searchModel: SearchViewModel = viewModel()
-
-                                    Trending(
-                                        backStack = backStack,
-                                        modifier = Modifier
-                                            .parent()
-                                            .padding(bottom = 72.dp)
-                                    )
-
-                                    if (isSearchUIVisible) {
-                                        SearchOverlay(
-                                            model = searchModel,
-                                            onDismiss = { isSearchUIVisible = false },
-                                            onCardSelected = { cardID ->
-                                                backStack.add(YGOCardKey(cardID))
-                                            },
+                                    if (!isSearchUIVisible) {
+                                        Trending(
+                                            backStack = backStack,
                                             modifier = Modifier
                                                 .parent()
+                                                .padding(bottom = 72.dp)
                                         )
+                                    } else {
+                                        search()
                                     }
                                 }
 
