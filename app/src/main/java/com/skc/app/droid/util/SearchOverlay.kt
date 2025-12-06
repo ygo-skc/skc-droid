@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -36,6 +37,7 @@ fun SearchOverlay(
     model: SearchViewModel,
     onDismiss: () -> Unit,
     onCardSelected: (String) -> Unit,
+    state: LazyListState,
     modifier: Modifier = Modifier
 ) {
     val subject by model.subject.collectAsState()
@@ -106,6 +108,7 @@ fun SearchOverlay(
                 modifier = Modifier.imePadding(),
                 verticalArrangement = Arrangement.spacedBy(10.dp),
                 contentPadding = PaddingValues(bottom = 20.dp),
+                state = state
             ) {
                 itemsIndexed(results) { _, card ->
                     YGOCardListItem(card = card, onClick = {

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.TrendingDown
@@ -35,6 +36,7 @@ import com.skc.app.droid.viewmodel.TrendingViewModel
 @Composable
 fun Trending(
     backStack: SnapshotStateList<Any>,
+    state: LazyListState,
     modifier: Modifier = Modifier
 ) {
     val model: TrendingViewModel = viewModel()
@@ -55,7 +57,8 @@ fun Trending(
                 modifier = Modifier
                     .fillMaxSize(),
                 contentPadding = PaddingValues(bottom = 10.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                state = state
             ) {
                 item {
                     Text(

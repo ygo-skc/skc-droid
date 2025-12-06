@@ -1,9 +1,9 @@
 package com.skc.app.droid.ui.home
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
@@ -21,6 +21,7 @@ import java.time.LocalDateTime
 @Composable
 fun Home(
     backStack: SnapshotStateList<Any>,
+    state: ScrollState,
     modifier: Modifier = Modifier
 ) {
     val model: HomeViewModel = viewModel()
@@ -41,7 +42,7 @@ fun Home(
     ) {
         Column(
             modifier = modifier
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(state)
                 .padding(bottom = 10.dp),
             verticalArrangement = Arrangement.spacedBy(40.dp)
         ) {

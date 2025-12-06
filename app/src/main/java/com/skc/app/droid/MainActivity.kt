@@ -3,6 +3,7 @@ package com.skc.app.droid
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.core.tween
@@ -12,6 +13,8 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
@@ -55,28 +58,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        enableEdgeToEdge()
         setContent {
-            var isSearchUIVisible by remember { mutableStateOf(false) }
-
-            val backStack = remember { mutableStateListOf<Any>(HomeKey) }
-            val isBottomBarVisible =
-                !isSearchUIVisible && listOf(HomeKey, TrendingKey).contains(backStack.last())
-
-            val search: @Composable () -> Unit = {
-                val searchModel: SearchViewModel = viewModel()
-
-                SearchOverlay(
-                    model = searchModel,
-                    onDismiss = { isSearchUIVisible = false },
-                    onCardSelected = { cardID ->
-                        backStack.add(YGOCardKey(cardID))
-                    },
-                    modifier = Modifier
-                        .parent()
-                )
-            }
-
             SKCTheme {
+                var isSearchUIVisible by remember { mutableStateOf(false) }
+
+                val backStack = remember { mutableStateListOf<Any>(HomeKey) }
+                val isBottomBarVisible =
+                    !isSearchUIVisible && listOf(HomeKey, TrendingKey).contains(backStack.last())
+
                 Scaffold(
                     modifier = Modifier
                         .fillMaxSize(),
@@ -106,6 +96,22 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 ) { innerPadding ->
+                    val searchModel: SearchViewModel = viewModel()
+                    val searchListState = rememberLazyListState()
+
+                    val search: @Composable () -> Unit = {
+                        SearchOverlay(
+                            model = searchModel,
+                            onDismiss = { isSearchUIVisible = false },
+                            onCardSelected = { cardID ->
+                                backStack.add(YGOCardKey(cardID))
+                            },
+                            state = searchListState,
+                            modifier = Modifier
+                                .parent()
+                        )
+                    }
+
                     NavDisplay(
                         modifier = Modifier
                             .padding(top = innerPadding.calculateTopPadding()),
@@ -136,9 +142,11 @@ class MainActivity : ComponentActivity() {
                         entryProvider = { key ->
                             when (key) {
                                 is HomeKey -> NavEntry(key) {
+                                    val homeScrollState = rememberScrollState()
                                     if (!isSearchUIVisible) {
                                         Home(
                                             backStack = backStack,
+                                            state = homeScrollState,
                                             modifier = Modifier
                                                 .parent()
                                                 .padding(bottom = 72.dp)
@@ -149,9 +157,11 @@ class MainActivity : ComponentActivity() {
                                 }
 
                                 is TrendingKey -> NavEntry(key) {
+                                    val trendingScrollState = rememberLazyListState()
                                     if (!isSearchUIVisible) {
                                         Trending(
                                             backStack = backStack,
+                                            state = trendingScrollState,
                                             modifier = Modifier
                                                 .parent()
                                                 .padding(bottom = 72.dp)
