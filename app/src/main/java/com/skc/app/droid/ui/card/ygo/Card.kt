@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -36,7 +37,10 @@ import com.skc.app.droid.viewmodel.CardViewModel
 import com.skc.app.droid.x.parent
 
 @Composable
-fun Card(cardID: String) {
+fun Card(
+    cardID: String,
+    paddingValues: PaddingValues
+) {
     val model: CardViewModel = viewModel(
         factory = CardViewModel.Factory,
         extras = MutableCreationExtras().apply {
@@ -53,7 +57,9 @@ fun Card(cardID: String) {
     Column(
         modifier = Modifier
             .parent()
-            .verticalScroll(rememberScrollState()),
+            .padding(top = paddingValues.calculateTopPadding())
+            .verticalScroll(rememberScrollState())
+            .padding(bottom = paddingValues.calculateBottomPadding()),
         verticalArrangement = Arrangement.spacedBy(40.dp)
     ) {
         if (isFetching) {

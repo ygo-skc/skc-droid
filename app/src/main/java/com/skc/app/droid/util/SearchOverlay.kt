@@ -107,7 +107,7 @@ fun SearchOverlay(
             LazyColumn(
                 modifier = Modifier.imePadding(),
                 verticalArrangement = Arrangement.spacedBy(10.dp),
-                contentPadding = PaddingValues(bottom = 20.dp),
+                contentPadding = PaddingValues(bottom = 10.dp),
                 state = state
             ) {
                 itemsIndexed(results) { _, card ->

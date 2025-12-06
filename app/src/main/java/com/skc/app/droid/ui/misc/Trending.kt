@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -32,12 +33,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.skc.app.droid.YGOCardKey
 import com.skc.app.droid.ui.card.ygo.YGOCardListItem
 import com.skc.app.droid.viewmodel.TrendingViewModel
+import com.skc.app.droid.x.parent
 
 @Composable
 fun Trending(
     backStack: SnapshotStateList<Any>,
     state: LazyListState,
-    modifier: Modifier = Modifier
+    paddingValues: PaddingValues
 ) {
     val model: TrendingViewModel = viewModel()
     val isFetching by model.isFetching.collectAsState()
@@ -46,7 +48,11 @@ fun Trending(
         model.fetchData()
     }
 
-    Box(modifier = modifier) {
+    Box(
+        modifier = Modifier
+            .parent()
+            .padding(top = paddingValues.calculateTopPadding(), bottom = 72.dp)
+    ) {
         if (isFetching) {
             CircularProgressIndicator(
                 trackColor = MaterialTheme.colorScheme.primaryContainer,

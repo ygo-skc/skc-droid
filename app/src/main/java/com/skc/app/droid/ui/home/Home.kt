@@ -3,6 +3,7 @@ package com.skc.app.droid.ui.home
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
@@ -16,13 +17,14 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.skc.app.droid.YGOCardKey
 import com.skc.app.droid.viewmodel.HomeViewModel
+import com.skc.app.droid.x.parent
 import java.time.LocalDateTime
 
 @Composable
 fun Home(
     backStack: SnapshotStateList<Any>,
     state: ScrollState,
-    modifier: Modifier = Modifier
+    paddingValues: PaddingValues
 ) {
     val model: HomeViewModel = viewModel()
     LaunchedEffect("Home View Model") {
@@ -41,9 +43,10 @@ fun Home(
         },
     ) {
         Column(
-            modifier = modifier
-                .verticalScroll(state)
-                .padding(bottom = 10.dp),
+            modifier = Modifier
+                .parent()
+                .padding(top = paddingValues.calculateTopPadding(), bottom = 72.dp)
+                .verticalScroll(state),
             verticalArrangement = Arrangement.spacedBy(40.dp)
         ) {
             DBStats(stats)
