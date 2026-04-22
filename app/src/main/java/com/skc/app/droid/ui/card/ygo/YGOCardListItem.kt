@@ -42,34 +42,38 @@ fun YGOCardListItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 YGOCardImage(
-                    size = 70.dp,
+                    size = 65.dp,
                     cardID = card.cardID,
                     imageSize = YGOImageSize.TINY,
                     variant = YGOCardImageVariant.ROUNDED_CORNER
                 )
-                Column(
-                    modifier = Modifier.align(Alignment.Top)
-                ) {
+
+                Column(modifier = Modifier.align(Alignment.Top)) {
                     Text(
                         text = card.cardName,
                         fontWeight = FontWeight.Medium,
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
                     )
+
                     Row(
                         modifier = Modifier
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .padding(bottom = 2.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(text = card.monsterType ?: card.attribute.value)
+                        Text(
+                            text = card.monsterType ?: card.attribute.value,
+                        )
                         Text(
                             text = card.cardID,
                             fontWeight = FontWeight.Light,
-                            style = MaterialTheme.typography.bodySmall
+                            style = MaterialTheme.typography.bodyMedium
                         )
                     }
-                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         CardColorIndicatorView(cardColor = card.cardColor)
                         Attribute(attribute = card.attribute)
                     }

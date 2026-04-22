@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.dp
 import com.skc.app.droid.R
 import com.squareup.moshi.Json
 
-enum class YGOCardImageVariant() {
+enum class YGOCardImageVariant {
     ROUND,
     ROUNDED_CORNER,
 }
@@ -54,7 +54,7 @@ enum class YGOImageSize(val value: String) {
     ORIGINAL("original")
 }
 
-enum class TaskStatus() {
+enum class TaskStatus {
     PENDING,
     DONE,
     UNINITIATED,

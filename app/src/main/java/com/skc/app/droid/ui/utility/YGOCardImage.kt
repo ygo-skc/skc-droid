@@ -20,12 +20,12 @@ import com.skc.app.droid.ui.theme.cardGradientUI
 
 @Composable
 fun YGOCardImage(
+    modifier: Modifier = Modifier,
     size: Dp,
     cardID: String,
     cardColor: String? = null,
     imageSize: YGOImageSize = YGOImageSize.SMALL,
     variant: YGOCardImageVariant = YGOCardImageVariant.ROUND,
-    modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier
